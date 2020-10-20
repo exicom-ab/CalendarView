@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CalendarViewProject</string>
+    <string name="app_name">Calendar Exicom</string>
 
     <string-array name="english_week_string_array">
         <item>日</item>
