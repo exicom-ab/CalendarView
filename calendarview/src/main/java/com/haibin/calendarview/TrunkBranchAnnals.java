@@ -3,24 +3,23 @@ package com.haibin.calendarview;
 import android.content.Context;
 
 /**
- * 干支纪年算法
- * Created by huanghaibin on 2019/2/12.
+ * Ganzhi chronology algorithm
  */
 @SuppressWarnings("unused")
 public final class TrunkBranchAnnals {
 
     /**
-     * 天干字符串
+     * Zodiac string
      */
     private static String[] TRUNK_STR = null;
 
     /**
-     * 地支字符串
+     * Earthly Branch String
      */
     private static String[] BRANCH_STR = null;
 
     /**
-     * 单独使用请先调用这个方法
+     * Please call this method for single use
      * @param context context
      */
     public static void init(Context context) {
@@ -33,10 +32,10 @@ public final class TrunkBranchAnnals {
     }
 
     /**
-     * 获取某一年对应天干文字
+     * Get the corresponding Chinese characters of a certain year
      *
-     * @param year 年份
-     * @return 天干由甲到癸，每10一轮回
+     * @param year years
+     * @return Heavenly stem from Jia to Kui, every 10 cycles
      */
     @SuppressWarnings("all")
     public static String getTrunkString(int year) {
@@ -44,9 +43,9 @@ public final class TrunkBranchAnnals {
     }
 
     /**
-     * 获取某一年对应天干，
+     * Get the corresponding heavenly stems of a certain year，
      *
-     * @param year 年份
+     * @param year years
      * @return 4 5 6 7 8 9 10 1 2 3
      */
     @SuppressWarnings("all")
@@ -56,10 +55,10 @@ public final class TrunkBranchAnnals {
     }
 
     /**
-     * 获取某一年对应地支文字
+     * Get the corresponding earthly branch text for a certain year
      *
-     * @param year 年份
-     * @return 地支由子到亥，每12一轮回
+     * @param year years
+     * @return Earthly Branch from Zi to Hai, every 12 cycles
      */
     @SuppressWarnings("all")
     public static String getBranchString(int year) {
@@ -67,9 +66,9 @@ public final class TrunkBranchAnnals {
     }
 
     /**
-     * 获取某一年对应地支
+     * Obtain the corresponding earthly branch of a certain year
      *
-     * @param year 年份
+     * @param year years
      * @return 4 5 6 7 8 9 10 11 12 1 2 3
      */
     @SuppressWarnings("all")
@@ -79,10 +78,10 @@ public final class TrunkBranchAnnals {
     }
 
     /**
-     * 获取干支纪年
+     * Obtain the chronology
      *
-     * @param year 年份
-     * @return 干支纪年
+     * @param year years
+     * @return Ganzhi Chronicle
      */
     public static String getTrunkBranchYear(int year) {
         return String.format("%s%s", getTrunkString(year), getBranchString(year));

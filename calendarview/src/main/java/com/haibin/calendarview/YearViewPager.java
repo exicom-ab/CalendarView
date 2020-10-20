@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.annotation.SuppressLint;
@@ -30,7 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 
 /**
- * 年份+月份选择布局
+ * Year + month selection layout
  * ViewPager + RecyclerView
  */
 public final class YearViewPager extends ViewPager {
@@ -101,7 +86,7 @@ public final class YearViewPager extends ViewPager {
     }
 
     /**
-     * 通知刷新
+     * Notification refresh
      */
     void notifyDataSetChanged() {
         this.mYearCount = mDelegate.getMaxYear() - mDelegate.getMinYear() + 1;
@@ -112,7 +97,7 @@ public final class YearViewPager extends ViewPager {
     }
 
     /**
-     * 滚动到某年
+     * Scroll to a certain year
      *
      * @param year         year
      * @param smoothScroll smoothScroll
@@ -122,7 +107,7 @@ public final class YearViewPager extends ViewPager {
     }
 
     /**
-     * 更新日期范围
+     * Update date range
      */
     final void updateRange() {
         isUpdateYearView = true;
@@ -131,7 +116,7 @@ public final class YearViewPager extends ViewPager {
     }
 
     /**
-     * 更新界面
+     * Update interface
      */
     final void update() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -142,7 +127,7 @@ public final class YearViewPager extends ViewPager {
 
 
     /**
-     * 更新周起始
+     * Start of update week
      */
     final void updateWeekStart() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -153,7 +138,7 @@ public final class YearViewPager extends ViewPager {
     }
 
     /**
-     * 更新字体颜色大小
+     * Update font color size
      */
     final void updateStyle(){
         for (int i = 0; i < getChildCount(); i++) {
@@ -174,11 +159,11 @@ public final class YearViewPager extends ViewPager {
     }
 
     /**
-     * 计算相对高度
+     * Calculate relative height
      *
      * @param context context
      * @param view    view
-     * @return 月视图选择器最适合的高度
+     * @return The most suitable height for the month view selector
      */
     private static int getHeight(Context context, View view) {
         WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);

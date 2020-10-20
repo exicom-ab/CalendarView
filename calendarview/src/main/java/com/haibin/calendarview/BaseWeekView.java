@@ -1,25 +1,10 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.content.Context;
 
 /**
- * 最基础周视图，因为日历UI采用热插拔实现，所以这里必须继承实现，达到UI一致即可
- * 可通过此扩展各种视图如：WeekView、RangeWeekView
+ * The most basic weekly view, because the calendar UI is implemented by hot plugging, it must be implemented here to achieve the same UI.
+ * Various views such as：WeekView、RangeWeekView
  */
 
 public abstract class BaseWeekView extends BaseView {
@@ -29,7 +14,7 @@ public abstract class BaseWeekView extends BaseView {
     }
 
     /**
-     * 初始化周视图控件
+     * Initialize the week view control
      *
      * @param calendar calendar
      */
@@ -41,7 +26,7 @@ public abstract class BaseWeekView extends BaseView {
 
 
     /**
-     * 记录已经选择的日期
+     * Record the selected date
      *
      * @param calendar calendar
      */
@@ -55,7 +40,7 @@ public abstract class BaseWeekView extends BaseView {
 
 
     /**
-     * 周视图切换点击默认位置
+     * Weekly view switch click the default position
      *
      * @param calendar calendar
      * @param isNotice isNotice
@@ -119,10 +104,10 @@ public abstract class BaseWeekView extends BaseView {
     }
 
     /**
-     * 是否是最小访问边界了
+     * Is it the minimum access boundary?
      *
      * @param calendar calendar
-     * @return 是否是最小访问边界了
+     * @return Is it the minimum access boundary?
      */
     final boolean isMinRangeEdge(Calendar calendar) {
         java.util.Calendar c = java.util.Calendar.getInstance();
@@ -134,10 +119,10 @@ public abstract class BaseWeekView extends BaseView {
     }
 
     /**
-     * 获得边界范围内下标
+     * Get the subscript within the boundary
      *
      * @param isMinEdge isMinEdge
-     * @return 获得边界范围内下标
+     * @return Get the subscript within the boundary
      */
     final int getEdgeIndex(boolean isMinEdge) {
         for (int i = 0; i < mItems.size(); i++) {
@@ -154,9 +139,9 @@ public abstract class BaseWeekView extends BaseView {
 
 
     /**
-     * 获取点击的日历
+     * Get clicked calendar
      *
-     * @return 获取点击的日历
+     * @return Get clicked calendar
      */
     protected Calendar getIndex() {
 
@@ -173,14 +158,14 @@ public abstract class BaseWeekView extends BaseView {
 
 
     /**
-     * 更新显示模式
+     * Update display mode
      */
     final void updateShowMode() {
         invalidate();
     }
 
     /**
-     * 更新周起始
+     * Start of update week
      */
     final void updateWeekStart() {
 
@@ -195,7 +180,7 @@ public abstract class BaseWeekView extends BaseView {
     }
 
     /**
-     * 更新当选模式
+     * Update election model
      */
     final void updateSingleSelect() {
         if (!mItems.contains(mDelegate.mSelectedCalendar)) {
@@ -209,7 +194,7 @@ public abstract class BaseWeekView extends BaseView {
         if (mItems == null)
             return;
         if (mItems.contains(mDelegate.getCurrentDay())) {
-            for (Calendar a : mItems) {//添加操作
+            for (Calendar a : mItems) {//Add operation
                 a.setCurrentDay(false);
             }
             int index = mItems.indexOf(mDelegate.getCurrentDay());
@@ -225,11 +210,11 @@ public abstract class BaseWeekView extends BaseView {
     }
 
     /**
-     * 开始绘制前的钩子，这里做一些初始化的操作，每次绘制只调用一次，性能高效
-     * 没有需要可忽略不实现
-     * 例如：
-     * 1、需要绘制圆形标记事件背景，可以在这里计算半径
-     * 2、绘制矩形选中效果，也可以在这里计算矩形宽和高
+     * The hook before starting to draw, here are some initialization operations, and it is only called once for each drawing, and the performance is efficient
+     * No need can be ignored and not realized
+     * E.g：
+     * 1、Need to draw a circular marker event background, you can calculate the radius here
+     * 2、Draw rectangle selection effect, you can also calculate rectangle width and height here
      */
     protected void onPreviewHook() {
         // TODO: 2017/11/16
@@ -237,10 +222,10 @@ public abstract class BaseWeekView extends BaseView {
 
 
     /**
-     * 循环绘制开始的回调，不需要可忽略
-     * 绘制每个日历项的循环，用来计算baseLine、圆心坐标等都可以在这里实现
+     * Callback for the start of loop drawing, no need to ignore
+     * Draw the cycle of each calendar item, used to calculate baseLine, circle center coordinates, etc. can be implemented here
      *
-     * @param x 日历Card x起点坐标
+     * @param x Calendar Card x starting point coordinates
      */
     @SuppressWarnings("unused")
     protected void onLoopStart(int x) {

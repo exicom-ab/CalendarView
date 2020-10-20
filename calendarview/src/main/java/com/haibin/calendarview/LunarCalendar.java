@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.annotation.SuppressLint;
@@ -23,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 农历计算相关
+ * Lunar calculation related
  */
 @SuppressWarnings("all")
 public final class LunarCalendar {
@@ -43,49 +28,49 @@ public final class LunarCalendar {
     }
 
     /**
-     * 农历月份第一天转写
+     * Transcribed on the first day of the lunar month
      */
     private static String[] MONTH_STR = null;
 
     /**
-     * 传统农历节日
+     * Traditional lunar festival
      */
     private static String[] TRADITION_FESTIVAL_STR = null;
 
     /**
-     * 农历大写
+     * Chinese lunar capital
      */
     private static String[] DAY_STR = null;
 
     /**
-     * 特殊节日的数组
+     * Array of special holidays
      */
     private static String[] SPECIAL_FESTIVAL_STR = null;
 
     /**
-     * 特殊节日、母亲节和父亲节,感恩节等
+     * Special holidays, Mother's Day and Father's Day, Thanksgiving Day, etc.
      */
     @SuppressLint("UseSparseArrays")
     private static final Map<Integer, String[]> SPECIAL_FESTIVAL = new HashMap<>();
 
     /**
-     * 公历节日
+     * Gregorian holiday
      */
     private static String[] SOLAR_CALENDAR = null;
 
     /**
-     * 保存每年24节气
+     * Save 24 solar terms per year
      */
     @SuppressLint("UseSparseArrays")
     private static final Map<Integer, String[]> SOLAR_TERMS = new HashMap<>();
 
     /**
-     * 返回传统农历节日
+     * Return to traditional lunar festival
      *
-     * @param year  农历年
-     * @param month 农历月
-     * @param day   农历日
-     * @return 返回传统农历节日
+     * @param year Lunar New Year
+     * @param month Lunar month
+     * @param day Chinese calendar day
+     * @return returns to the traditional lunar festival
      */
     private static String getTraditionFestival(int year, int month, int day) {
         if (month == 12) {
@@ -107,11 +92,11 @@ public final class LunarCalendar {
 
 
     /**
-     * 数字转换为汉字月份
+     * Numbers are converted to Chinese characters month
      *
-     * @param month 月
-     * @param leap  1==闰月
-     * @return 数字转换为汉字月份
+     * @param month month
+     * @param leap 1== leap month
+     * @return number is converted to Chinese character month
      */
     private static String numToChineseMonth(int month, int leap) {
         if (leap == 1) {
@@ -121,12 +106,12 @@ public final class LunarCalendar {
     }
 
     /**
-     * 数字转换为农历节日或者日期
+     * Numbers are converted to lunar holidays or dates
      *
-     * @param month 月
-     * @param day   日
-     * @param leap  1==闰月
-     * @return 数字转换为汉字日
+     * @param month month
+     * @param day
+     * @param leap 1== leap month
+     * @return numbers are converted to Chinese characters
      */
     private static String numToChinese(int month, int day, int leap) {
         if (day == 1) {
@@ -136,14 +121,14 @@ public final class LunarCalendar {
     }
 
     /**
-     * 用来表示1900年到2099年间农历年份的相关信息，共24位bit的16进制表示，其中：
-     * 1. 前4位表示该年闰哪个月；
-     * 2. 5-17位表示农历年份13个月的大小月分布，0表示小，1表示大；
-     * 3. 最后7位表示农历年首（正月初一）对应的公历日期。
+     * Used to represent the relevant information of the lunar calendar year from 1900 to 2099, a total of 24 bits of hexadecimal representation, of which:
+     * 1. The first 4 digits indicate which month in the year;
+     * 2. The 5-17 digits represent the distribution of large and small months in the 13 months of the lunar calendar year, 0 means small, 1 means large;
+     * 3. The last 7 digits represent the Gregorian calendar date corresponding to the first lunar year (first day of the first month).
      * <p/>
-     * 以2014年的数据0x955ABF为例说明：
+     * Take 2014 data 0x955ABF as an example:
      * 1001 0101 0101 1010 1011 1111
-     * 闰九月 农历正月初一对应公历1月31号
+     * Leap September, the first day of the first month of the lunar calendar corresponds to January 31 of the Gregorian calendar
      */
     private static final int[] LUNAR_INFO = {
             0x04bd8,0x04ae0,0x0a570,0x054d5,0x0d260,0x0d950,0x16554,0x056a0,0x09ad0,0x055d2,//1900-1909
@@ -171,11 +156,11 @@ public final class LunarCalendar {
 
 
     /**
-     * 农历 year年month月的总天数，总共有13个月包括闰月
+     * The total number of days in the year, month and month of the lunar calendar, there are 13 months including leap months
      *
-     * @param year  将要计算的年份
-     * @param month 将要计算的月份
-     * @return 传回农历 year年month月的总天数
+     * @param year The year to be calculated
+     * @param month The month to be calculated
+     * @return returns the total number of days in the lunar calendar year, month and month
      */
     public static int daysInLunarMonth(int year, int month) {
         if ((LUNAR_INFO[year - CalendarViewDelegate.MIN_YEAR] & (0x10000 >> month)) == 0)
@@ -185,11 +170,11 @@ public final class LunarCalendar {
     }
 
     /**
-     * 获取公历节日
+     * Get Gregorian calendar holiday
      *
-     * @param month 公历月份
-     * @param day   公历日期
-     * @return 公历节日
+     * @param month Gregorian calendar month
+     * @param day Gregorian calendar date
+     * @return Gregorian calendar holiday
      */
     private static String gregorianFestival(int month, int day) {
         String text = getString(month, day);
@@ -209,12 +194,12 @@ public final class LunarCalendar {
 
 
     /**
-     * 返回24节气
+     * Return 24 solar terms
      *
-     * @param year  年
-     * @param month 月
-     * @param day   日
-     * @return 返回24节气
+     * @param year
+     * @param month month
+     * @param day
+     * @return returns 24 solar terms
      */
     private static String getSolarTerm(int year, int month, int day) {
         if (!SOLAR_TERMS.containsKey(year)) {
@@ -235,12 +220,12 @@ public final class LunarCalendar {
 
 
     /**
-     * 获取农历节日
+     * Get Lunar Festival
      *
-     * @param year  年
-     * @param month 月
-     * @param day   日
-     * @return 农历节日
+     * @param year
+     * @param month month
+     * @param day
+     * @return Lunar Festival
      */
     public static String getLunarText(int year, int month, int day) {
         String termText = LunarCalendar.getSolarTerm(year, month, day);
@@ -258,14 +243,14 @@ public final class LunarCalendar {
 
 
     /**
-     * 获取特殊计算方式的节日
-     * 如：每年五月的第二个星期日为母亲节，六月的第三个星期日为父亲节
-     * 每年11月第四个星期四定为"感恩节"
+     * Get special calculation methods for festivals
+     * For example: the second Sunday in May is Mother's Day, and the third Sunday in June is Father's Day
+     * The fourth Thursday of November is designated as "Thanksgiving Day"
      *
-     * @param year  year
+     * @param year year
      * @param month month
-     * @param day   day
-     * @return 获取西方节日
+     * @param day day
+     * @return Get western festivals
      */
     private static String getSpecialFestival(int year, int month, int day) {
         if (!SPECIAL_FESTIVAL.containsKey(year)) {
@@ -286,11 +271,11 @@ public final class LunarCalendar {
 
 
     /**
-     * 获取每年的母亲节和父亲节和感恩节
-     * 特殊计算方式的节日
+     * Get the annual Mother's Day and Father's Day and Thanksgiving Day
+     * Festivals with special calculation methods
      *
-     * @param year 年
-     * @return 获取每年的母亲节和父亲节、感恩节
+     * @param year
+     * @return get the annual Mother's Day, Father's Day and Thanksgiving Day
      */
     private static String[] getSpecialFestivals(int year) {
         String[] festivals = new String[3];
@@ -329,7 +314,7 @@ public final class LunarCalendar {
     }
 
     /**
-     * 初始化各种农历、节日
+     * Initialize various lunar calendars and festivals
      *
      * @param calendar calendar
      */
@@ -376,10 +361,10 @@ public final class LunarCalendar {
     }
 
     /**
-     * 获取农历节日
+     * Get Lunar Festival
      *
      * @param calendar calendar
-     * @return 获取农历节日
+     * @return Get the Lunar Festival
      */
     public static String getLunarText(Calendar calendar) {
         return getLunarText(calendar.getYear(), calendar.getMonth(), calendar.getDay());

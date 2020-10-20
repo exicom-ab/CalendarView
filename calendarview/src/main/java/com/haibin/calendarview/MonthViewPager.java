@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.annotation.SuppressLint;
@@ -29,9 +14,8 @@ import androidx.viewpager.widget.ViewPager;
 import java.lang.reflect.Constructor;
 import java.util.List;
 
-
 /**
- * 月份切换ViewPager，自定义适应高度
+ * Switch ViewPager by month, customize adaptation height
  */
 public final class MonthViewPager extends ViewPager {
 
@@ -50,7 +34,7 @@ public final class MonthViewPager extends ViewPager {
     WeekBar mWeekBar;
 
     /**
-     * 是否使用滚动到某一天
+     * Whether to use scroll to a certain day
      */
     private boolean isUsingScrollToCalendar = false;
 
@@ -63,7 +47,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 初始化
+     * initialization
      *
      * @param delegate delegate
      */
@@ -80,7 +64,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 初始化
+     * initialization
      */
     private void init() {
         mMonthCount = 12 * (mDelegate.getMaxYear() - mDelegate.getMinYear())
@@ -94,12 +78,12 @@ public final class MonthViewPager extends ViewPager {
                     return;
                 }
                 int height;
-                if (position < getCurrentItem()) {//右滑-1
+                if (position < getCurrentItem()) {//Swipe right-1
                     height = (int) ((mPreViewHeight)
                             * (1 - positionOffset) +
                             mCurrentViewHeight
                                     * positionOffset);
-                } else {//左滑+！
+                } else {//Swipe left+!
                     height = (int) ((mCurrentViewHeight)
                             * (1 - positionOffset) +
                             (mNextViewHeight)
@@ -122,12 +106,12 @@ public final class MonthViewPager extends ViewPager {
                     }
                     mDelegate.mIndexCalendar = calendar;
                 }
-                //月份改变事件
+                //Month change event
                 if (mDelegate.mMonthChangeListener != null) {
                     mDelegate.mMonthChangeListener.onMonthChange(calendar.getYear(), calendar.getMonth());
                 }
 
-                //周视图显示的时候就需要动态改变月视图高度
+                //The height of the month view needs to be dynamically changed when the week view is displayed
                 if (mWeekPager.getVisibility() == VISIBLE) {
                     updateMonthViewHeight(calendar.getYear(), calendar.getMonth());
                     return;
@@ -184,13 +168,13 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 更新月视图的高度
+     * Update the height of the month view
      *
      * @param year  year
      * @param month month
      */
     private void updateMonthViewHeight(int year, int month) {
-        if (mDelegate.getMonthViewShowMode() == CalendarViewDelegate.MODE_ALL_MONTH) {//非动态高度就不需要了
+        if (mDelegate.getMonthViewShowMode() == CalendarViewDelegate.MODE_ALL_MONTH) {//Non-dynamic height is not needed
             mCurrentViewHeight = 6 * mDelegate.getCalendarItemHeight();
             ViewGroup.LayoutParams params = getLayoutParams();
             params.height = mCurrentViewHeight;
@@ -198,7 +182,7 @@ public final class MonthViewPager extends ViewPager {
         }
 
         if (mParentLayout != null) {
-            if (getVisibility() != VISIBLE) {//如果已经显示周视图，则需要动态改变月视图高度，否则显示就有bug
+            if (getVisibility() != VISIBLE) {//If the week view is already displayed, you need to dynamically change the height of the month view, otherwise the display will have a bug
                 ViewGroup.LayoutParams params = getLayoutParams();
                 params.height = CalendarUtil.getMonthViewHeight(year, month,
                         mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
@@ -234,7 +218,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 刷新
+     * Refresh
      */
     void notifyDataSetChanged() {
         mMonthCount = 12 * (mDelegate.getMaxYear() - mDelegate.getMinYear())
@@ -244,7 +228,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 更新月视图Class
+     * Update month view class
      */
     void updateMonthViewClass() {
         isUpdateMonthView = true;
@@ -253,7 +237,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 更新日期范围
+     * Update date range
      */
     final void updateRange() {
         isUpdateMonthView = true;
@@ -292,12 +276,12 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 滚动到指定日期
+     * Scroll to the specified date
      *
-     * @param year           年
-     * @param month          月
-     * @param day            日
-     * @param invokeListener 调用日期事件
+     * @param year
+     * @param month month
+     * @param day
+     * @param invokeListener call date event
      */
     void scrollToCalendar(int year, int month, int day, boolean smoothScroll, boolean invokeListener) {
         isUsingScrollToCalendar = true;
@@ -342,7 +326,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 滚动到当前日期
+     * Scroll to current date
      */
     void scrollToCurrent(boolean smoothScroll) {
         isUsingScrollToCalendar = true;
@@ -370,9 +354,9 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 获取当前月份数据
+     * Get current month data
      *
-     * @return 获取当前月份数据
+     * @return Get current month data
      */
     List<Calendar> getCurrentMonthCalendars() {
         BaseMonthView view = findViewWithTag(getCurrentItem());
@@ -383,7 +367,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 更新为默认选择模式
+     * Update to the default selection mode
      */
     void updateDefaultSelect() {
         BaseMonthView view = findViewWithTag(getCurrentItem());
@@ -399,7 +383,7 @@ public final class MonthViewPager extends ViewPager {
 
 
     /**
-     * 更新选择效果
+     * Update selection effect
      */
     void updateSelected() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -410,7 +394,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 更新字体颜色大小
+     * Update font color size
      */
     final void updateStyle() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -421,7 +405,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 更新标记日期
+     * Update mark date
      */
     void updateScheme() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -431,7 +415,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 更新当前日期，夜间过度的时候调用这个函数，一般不需要调用
+     * Update the current date, call this function when the night is over, generally do not need to call
      */
     void updateCurrentDate() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -442,7 +426,7 @@ public final class MonthViewPager extends ViewPager {
 
 
     /**
-     * 更新显示模式
+     * Update display mode
      */
     void updateShowMode() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -466,7 +450,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 更新周起始
+     * Start of update week
      */
     void updateWeekStart() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -487,7 +471,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 更新高度
+     * Update height
      */
     final void updateItemHeight() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -528,7 +512,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 清除选择范围
+     * Clear selection
      */
     final void clearSelectRange() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -538,7 +522,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 清除单选选择
+     * Clear radio selection
      */
     final void clearSingleSelect() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -549,7 +533,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 清除单选选择
+     * Clear radio selection
      */
     final void clearMultiSelect() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -592,7 +576,7 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
-     * 日历卡月份Adapter
+     * Calendar Card Month Adapter
      */
     private final class MonthViewPagerAdapter extends PagerAdapter {
 

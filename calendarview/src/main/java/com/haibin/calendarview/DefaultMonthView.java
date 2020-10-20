@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.content.Context;
@@ -20,8 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 /**
- * 默认高仿魅族日历布局
- * Created by huanghaibin on 2017/11/15.
+ * Default high imitation Meizu calendar layout\
  */
 
 public final class DefaultMonthView extends MonthView {
@@ -53,12 +37,12 @@ public final class DefaultMonthView extends MonthView {
     }
 
     /**
-     * @param canvas    canvas
-     * @param calendar  日历日历calendar
-     * @param x         日历Card x起点坐标
-     * @param y         日历Card y起点坐标
-     * @param hasScheme hasScheme 非标记的日期
-     * @return true 则绘制onDrawScheme，因为这里背景色不是是互斥的
+     * @param canvas canvas
+     * @param calendar calendar
+     * @param x Calendar Card x starting point coordinates
+     * @param y Calendar Card y starting point coordinates
+     * @param hasScheme hasScheme unmarked date
+     * @return true will draw onDrawScheme, because the background color here is not mutually exclusive
      */
     @Override
     protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
@@ -80,7 +64,7 @@ public final class DefaultMonthView extends MonthView {
 
 
     /**
-     * 获取字体的宽
+     * Get the width of the font
      * @param text text
      * @return return
      */

@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.content.Context;
@@ -20,8 +5,7 @@ import android.graphics.Canvas;
 import android.view.View;
 
 /**
- * 周视图，因为日历UI采用热插拔实现，所以这里必须继承实现，达到UI一致即可
- * Created by huanghaibin on 2017/11/21.
+ * Week view, because the calendar UI is implemented by hot plugging, it must be implemented here to achieve the same UI.
  */
 public abstract class WeekView extends BaseWeekView {
 
@@ -30,7 +14,7 @@ public abstract class WeekView extends BaseWeekView {
     }
 
     /**
-     * 绘制日历文本
+     * Draw calendar text
      *
      * @param canvas canvas
      */
@@ -48,12 +32,12 @@ public abstract class WeekView extends BaseWeekView {
             boolean isSelected = i == mCurrentItem;
             boolean hasScheme = calendar.hasScheme();
             if (hasScheme) {
-                boolean isDrawSelected = false;//是否继续绘制选中的onDrawScheme
+                boolean isDrawSelected = false;//Whether to continue drawing the selected onDrawScheme
                 if (isSelected) {
                     isDrawSelected = onDrawSelected(canvas, calendar, x, true);
                 }
                 if (isDrawSelected || !isSelected) {
-                    //将画笔设置为标记颜色
+                    //Set the brush as the marker color
                     mSchemePaint.setColor(calendar.getSchemeColor() != 0 ?
                             calendar.getSchemeColor() : mDelegate.getSchemeThemeColor());
                     onDrawScheme(canvas, calendar, x);
@@ -129,7 +113,7 @@ public abstract class WeekView extends BaseWeekView {
             return true;
         }
 
-        if (mDelegate.isPreventLongPressedSelected()) {//如果启用拦截长按事件不选择日期
+        if (mDelegate.isPreventLongPressedSelected()) {//If the interception of long press events is enabled, no date is selected
             if (mDelegate.mCalendarLongClickListener != null) {
                 mDelegate.mCalendarLongClickListener.onCalendarLongClick(calendar);
             }
@@ -162,34 +146,34 @@ public abstract class WeekView extends BaseWeekView {
     }
 
     /**
-     * 绘制选中的日期
+     * Draw the selected date
      *
      * @param canvas    canvas
-     * @param calendar  日历日历calendar
-     * @param x         日历Card x起点坐标
-     * @param hasScheme hasScheme 非标记的日期
-     * @return 是否绘制 onDrawScheme
+     * @param calendar  calendar
+     * @param x         Calendar Card x starting point coordinates
+     * @param hasScheme hasScheme Unmarked date
+     * @return Whether to draw onDrawScheme
      */
     protected abstract boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, boolean hasScheme);
 
     /**
-     * 绘制标记的日期
+     * The date the marker was drawn
      *
      * @param canvas   canvas
-     * @param calendar 日历calendar
-     * @param x        日历Card x起点坐标
+     * @param calendar calendar
+     * @param x        Calendar Card x starting point coordinates
      */
     protected abstract void onDrawScheme(Canvas canvas, Calendar calendar, int x);
 
 
     /**
-     * 绘制日历文本
+     * Draw calendar text
      *
      * @param canvas     canvas
-     * @param calendar   日历calendar
-     * @param x          日历Card x起点坐标
-     * @param hasScheme  是否是标记的日期
-     * @param isSelected 是否选中
+     * @param calendar   calendar
+     * @param x          Calendar Card x starting point coordinates
+     * @param hasScheme  Is it a marked date
+     * @param isSelected Whether selected
      */
     protected abstract void onDrawText(Canvas canvas, Calendar calendar, int x, boolean hasScheme, boolean isSelected);
 }

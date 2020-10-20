@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.content.Context;
@@ -23,7 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * 年份布局选择View
+ * Year layout selection View
  */
 public final class YearRecyclerView extends RecyclerView {
     private CalendarViewDelegate mDelegate;
@@ -62,7 +47,7 @@ public final class YearRecyclerView extends RecyclerView {
     }
 
     /**
-     * 设置
+     * Set up
      *
      * @param delegate delegate
      */
@@ -72,7 +57,7 @@ public final class YearRecyclerView extends RecyclerView {
     }
 
     /**
-     * 初始化年视图
+     * Initialize year view
      *
      * @param year year
      */
@@ -91,7 +76,7 @@ public final class YearRecyclerView extends RecyclerView {
     }
 
     /**
-     * 更新周起始
+     * Start of update week
      */
     final void updateWeekStart() {
         for (Month month : mAdapter.getItems()) {
@@ -100,7 +85,7 @@ public final class YearRecyclerView extends RecyclerView {
     }
 
     /**
-     * 更新字体颜色大小
+     * Update font color size
      */
     final void updateStyle(){
         for (int i = 0; i < getChildCount(); i++) {
@@ -111,7 +96,7 @@ public final class YearRecyclerView extends RecyclerView {
     }
 
     /**
-     * 月份选择事件
+     * Month selection event
      *
      * @param listener listener
      */

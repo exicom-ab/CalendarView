@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.content.Context;
@@ -20,8 +5,7 @@ import android.graphics.Canvas;
 import android.view.View;
 
 /**
- * 多选周视图
- * Created by huanghaibin on 2018/9/11.
+ * Multiple selection week view
  */
 public abstract class MultiWeekView extends BaseWeekView {
 
@@ -30,7 +14,7 @@ public abstract class MultiWeekView extends BaseWeekView {
     }
 
     /**
-     * 绘制日历文本
+     * Draw calendar text
      *
      * @param canvas canvas
      */
@@ -50,12 +34,12 @@ public abstract class MultiWeekView extends BaseWeekView {
             boolean isNextSelected = isSelectNextCalendar(calendar);
             boolean hasScheme = calendar.hasScheme();
             if (hasScheme) {
-                boolean isDrawSelected = false;//是否继续绘制选中的onDrawScheme
+                boolean isDrawSelected = false;//Whether to continue drawing the selected onDrawScheme
                 if (isSelected) {
                     isDrawSelected = onDrawSelected(canvas, calendar, x, true, isPreSelected, isNextSelected);
                 }
                 if (isDrawSelected || !isSelected) {
-                    //将画笔设置为标记颜色
+                    //Set the brush as the marker color
                     mSchemePaint.setColor(calendar.getSchemeColor() != 0 ? calendar.getSchemeColor() : mDelegate.getSchemeThemeColor());
                     onDrawScheme(canvas, calendar, x, isSelected);
                 }
@@ -70,10 +54,10 @@ public abstract class MultiWeekView extends BaseWeekView {
 
 
     /**
-     * 日历是否被选中
+     * Whether the calendar is selected
      *
      * @param calendar calendar
-     * @return 日历是否被选中
+     * @return whether the calendar is selected
      */
     protected boolean isCalendarSelected(Calendar calendar) {
         return !onCalendarIntercept(calendar) && mDelegate.mSelectedCalendars.containsKey(calendar.toString());
@@ -141,10 +125,10 @@ public abstract class MultiWeekView extends BaseWeekView {
     }
 
     /**
-     * 上一个日期是否选中
+     * Whether the previous date is selected
      *
-     * @param calendar 当前日期
-     * @return 上一个日期是否选中
+     * @param calendar current date
+     * @return Whether the previous date is selected
      */
     protected final boolean isSelectPreCalendar(Calendar calendar) {
         Calendar preCalendar = CalendarUtil.getPreCalendar(calendar);
@@ -153,10 +137,10 @@ public abstract class MultiWeekView extends BaseWeekView {
     }
 
     /**
-     * 下一个日期是否选中
+     * Whether the next date is selected
      *
-     * @param calendar 当前日期
-     * @return 下一个日期是否选中
+     * @param calendar current date
+     * @return whether the next date is selected
      */
     protected final boolean isSelectNextCalendar(Calendar calendar) {
         Calendar nextCalendar = CalendarUtil.getNextCalendar(calendar);
@@ -165,38 +149,38 @@ public abstract class MultiWeekView extends BaseWeekView {
     }
 
     /**
-     * 绘制选中的日期
+     * Draw the selected date
      *
-     * @param canvas         canvas
-     * @param calendar       日历日历calendar
-     * @param x              日历Card x起点坐标
-     * @param hasScheme      hasScheme 非标记的日期
-     * @param isSelectedPre  上一个日期是否选中
-     * @param isSelectedNext 下一个日期是否选中
-     * @return 是否绘制 onDrawScheme
+     * @param canvas canvas
+     * @param calendar calendar
+     * @param x Calendar Card x starting point coordinates
+     * @param hasScheme hasScheme unmarked date
+     * @param isSelectedPre Whether the previous date is selected
+     * @param isSelectedNext Whether the next date is selected
+     * @return whether to draw onDrawScheme
      */
     protected abstract boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, boolean hasScheme,
                                               boolean isSelectedPre, boolean isSelectedNext);
 
     /**
-     * 绘制标记的日期
+     * Date the mark was drawn
      *
-     * @param canvas     canvas
-     * @param calendar   日历calendar
-     * @param x          日历Card x起点坐标
-     * @param isSelected 是否选中
+     * @param canvas canvas
+     * @param calendar calendar
+     * @param x Calendar Card x starting point coordinates
+     * @param isSelected is selected
      */
     protected abstract void onDrawScheme(Canvas canvas, Calendar calendar, int x, boolean isSelected);
 
 
     /**
-     * 绘制日历文本
+     * Draw calendar text
      *
-     * @param canvas     canvas
-     * @param calendar   日历calendar
-     * @param x          日历Card x起点坐标
-     * @param hasScheme  是否是标记的日期
-     * @param isSelected 是否选中
+     * @param canvas canvas
+     * @param calendar calendar
+     * @param x Calendar Card x starting point coordinates
+     * @param hasScheme is the date marked
+     * @param isSelected is selected
      */
     protected abstract void onDrawText(Canvas canvas, Calendar calendar, int x, boolean hasScheme, boolean isSelected);
 }

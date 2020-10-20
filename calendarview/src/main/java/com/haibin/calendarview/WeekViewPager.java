@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.annotation.SuppressLint;
@@ -30,9 +15,9 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 
 /**
- * 周视图滑动ViewPager，需要动态固定高度
- * 周视图是连续不断的视图，因此不能简单的得出每年都有52+1周，这样会计算重叠的部分
- * WeekViewPager需要和CalendarView关联:
+ * Weekly view sliding ViewPager requires dynamic fixed height
+ * The weekly view is a continuous view, so it cannot be simply concluded that there are 52+1 weeks per year. This will calculate the overlap
+ * WeekViewPager needs to be associated with CalendarView:
  */
 
 public final class WeekViewPager extends ViewPager {
@@ -41,12 +26,12 @@ public final class WeekViewPager extends ViewPager {
     private CalendarViewDelegate mDelegate;
 
     /**
-     * 日历布局，需要在日历下方放自己的布局
+     * Calendar layout, you need to put your own layout below the calendar
      */
     CalendarLayout mParentLayout;
 
     /**
-     * 是否使用滚动到某一天
+     * Whether to use scroll to a certain day
      */
     private boolean isUsingScrollToCalendar = false;
 
@@ -81,7 +66,7 @@ public final class WeekViewPager extends ViewPager {
 
             @Override
             public void onPageSelected(int position) {
-                //默认的显示星期四，周视图切换就显示星期4
+                //The default display is Thursday, and the week view is switched to display week 4
                 if (getVisibility() != VISIBLE) {
                     isUsingScrollToCalendar = false;
                     return;
@@ -109,9 +94,9 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 获取当前周数据
+     * Get current week data
      *
-     * @return 获取当前周数据
+     * @return Get current week data
      */
     List<Calendar> getCurrentWeekCalendars() {
         List<Calendar> calendars = CalendarUtil.getWeekCalendars(mDelegate.mIndexCalendar,
@@ -122,7 +107,7 @@ public final class WeekViewPager extends ViewPager {
 
 
     /**
-     * 更新周视图
+     * Update week view
      */
     void notifyDataSetChanged() {
         mWeekCount = CalendarUtil.getWeekCountBetweenBothCalendar(
@@ -137,7 +122,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 更新周视图布局
+     * Update week view layout
      */
     void updateWeekViewClass() {
         isUpdateWeekView = true;
@@ -146,7 +131,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 更新日期范围
+     * Update date range
      */
     void updateRange() {
         isUpdateWeekView = true;
@@ -171,12 +156,12 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 滚动到指定日期
+     * Scroll to specified date
      *
-     * @param year  年
-     * @param month 月
-     * @param day   日
-     * @param invokeListener 调用日期事件
+     * @param year  year
+     * @param month month
+     * @param day   day
+     * @param invokeListener Call date event
      */
     void scrollToCalendar(int year, int month, int day, boolean smoothScroll, boolean invokeListener) {
         isUsingScrollToCalendar = true;
@@ -201,7 +186,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 滚动到当前
+     * Scroll to current
      */
     void scrollToCurrent(boolean smoothScroll) {
         isUsingScrollToCalendar = true;
@@ -234,7 +219,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 更新任意一个选择的日期
+     * Update any selected date
      */
     void updateSelected(Calendar calendar, boolean smoothScroll) {
         int position = CalendarUtil.getWeekFromCalendarStartWithMinCalendar(calendar,
@@ -254,7 +239,7 @@ public final class WeekViewPager extends ViewPager {
 
 
     /**
-     * 更新单选模式
+     * Update single selection mode
      */
     void updateSingleSelect() {
         if (mDelegate.getSelectMode() == CalendarViewDelegate.SELECT_MODE_DEFAULT) {
@@ -267,7 +252,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 更新为默认选择模式
+     * Update to the default selection mode
      */
     void updateDefaultSelect() {
         BaseWeekView view = findViewWithTag(getCurrentItem());
@@ -278,7 +263,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 更新选择效果
+     * Update selection effect
      */
     void updateSelected() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -289,7 +274,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 更新字体颜色大小
+     * Update font color size
      */
     final void updateStyle() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -300,7 +285,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 更新标记日期
+     * Update mark date
      */
     void updateScheme() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -310,7 +295,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 更新当前日期，夜间过度的时候调用这个函数，一般不需要调用
+     * Update the current date, call this function when the night is over, generally do not need to call
      */
     void updateCurrentDate() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -320,7 +305,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 更新显示模式
+     * Update display mode
      */
     void updateShowMode() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -330,7 +315,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 更新周起始
+     * Start of update week
      */
     void updateWeekStart() {
         if (getAdapter() == null) {
@@ -346,8 +331,8 @@ public final class WeekViewPager extends ViewPager {
                 mDelegate.getMaxYearDay(),
                 mDelegate.getWeekStart());
         /*
-         * 如果count发生变化，意味着数据源变化，则必须先调用notifyDataSetChanged()，
-         * 否则会抛出异常
+         * If the count changes, which means the data source changes, you must call notifyDataSetChanged() first,
+         * Otherwise it will throw an exception
          */
         if (count != mWeekCount) {
             isUpdateWeekView = true;
@@ -362,7 +347,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 更新高度
+     * Update height
      */
     final void updateItemHeight() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -373,7 +358,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 清除选择范围
+     * Clear selection
      */
     final void clearSelectRange() {
         for (int i = 0; i < getChildCount(); i++) {
@@ -417,7 +402,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 周视图的高度应该与日历项的高度一致
+     * The height of the week view should match the height of the calendar entry
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -426,7 +411,7 @@ public final class WeekViewPager extends ViewPager {
     }
 
     /**
-     * 周视图切换
+     * Weekly view switch
      */
     private class WeekViewPagerAdapter extends PagerAdapter {
 

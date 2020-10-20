@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.content.Context;
@@ -29,7 +14,7 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 /**
- * 年视图
+ * Year view
  * Created by huanghaibin on 2018/10/9.
  */
 @SuppressWarnings("unused")
@@ -38,127 +23,127 @@ public abstract class YearView extends View {
     CalendarViewDelegate mDelegate;
 
     /**
-     * 当前月份日期的笔
+     * Pen for current month day
      */
     protected Paint mCurMonthTextPaint = new Paint();
 
     /**
-     * 其它月份日期颜色
+     * Other month day color
      */
     protected Paint mOtherMonthTextPaint = new Paint();
 
     /**
-     * 当前月份农历文本颜色
+     * Lunar text color of current month
      */
     protected Paint mCurMonthLunarTextPaint = new Paint();
 
     /**
-     * 当前月份农历文本颜色
+     * Lunar text color of current month
      */
     protected Paint mSelectedLunarTextPaint = new Paint();
 
     /**
-     * 其它月份农历文本颜色
+     * Lunar text color for other months
      */
     protected Paint mOtherMonthLunarTextPaint = new Paint();
 
     /**
-     * 其它月份农历文本颜色
+     * Lunar text color for other months
      */
     protected Paint mSchemeLunarTextPaint = new Paint();
 
     /**
-     * 标记的日期背景颜色画笔
+     * Marked date background color brush
      */
     protected Paint mSchemePaint = new Paint();
 
     /**
-     * 被选择的日期背景色
+     * The selected date background color
      */
     protected Paint mSelectedPaint = new Paint();
 
     /**
-     * 标记的文本画笔
+     * Marked text brush
      */
     protected Paint mSchemeTextPaint = new Paint();
 
     /**
-     * 选中的文本画笔
+     * Selected text brush
      */
     protected Paint mSelectTextPaint = new Paint();
 
     /**
-     * 当前日期文本颜色画笔
+     * Current date text color pen
      */
     protected Paint mCurDayTextPaint = new Paint();
 
     /**
-     * 当前日期文本颜色画笔
+     * Current date text color pen
      */
     protected Paint mCurDayLunarTextPaint = new Paint();
 
     /**
-     * 月份画笔
+     * Month brush
      */
     protected Paint mMonthTextPaint = new Paint();
 
     /**
-     * 周栏画笔
+     * Weekly brush
      */
     protected Paint mWeekTextPaint = new Paint();
 
     /**
-     * 日历项
+     * Calendar entry
      */
     List<Calendar> mItems;
 
     /**
-     * 每一项的高度
+     * Height of each item
      */
     protected int mItemHeight;
 
     /**
-     * 每一项的宽度
+     * The width of each item
      */
     protected int mItemWidth;
 
     /**
-     * Text的基线
+     * Text baseline
      */
     protected float mTextBaseLine;
 
     /**
-     * Text的基线
+     * Text baseline
      */
     protected float mMonthTextBaseLine;
 
     /**
-     * Text的基线
+     * Text baseline
      */
     protected float mWeekTextBaseLine;
 
     /**
-     * 当前日历卡年份
+     * Current calendar card year
      */
     protected int mYear;
 
     /**
-     * 当前日历卡月份
+     * Current calendar card month
      */
     protected int mMonth;
 
     /**
-     * 下个月偏移的数量
+     * Number of shifts in the next month
      */
     protected int mNextDiff;
 
     /**
-     * 周起始
+     * Week start
      */
     protected int mWeekStart;
 
     /**
-     * 日历的行数
+     * Number of calendar rows
      */
     protected int mLineCount;
 
@@ -173,7 +158,7 @@ public abstract class YearView extends View {
 
 
     /**
-     * 初始化配置
+     * Initial configuration
      */
     private void initPaint() {
         mCurMonthTextPaint.setAntiAlias(true);
@@ -238,7 +223,7 @@ public abstract class YearView extends View {
     }
 
     /**
-     * 设置
+     * Set up
      *
      * @param delegate delegate
      */
@@ -269,7 +254,7 @@ public abstract class YearView extends View {
     }
 
     /**
-     * 初始化年视图
+     * Initialize year view
      *
      * @param year  year
      * @param month month
@@ -288,7 +273,7 @@ public abstract class YearView extends View {
     }
 
     /**
-     * 测量大小
+     * Measure size
      *
      * @param width  width
      * @param height height
@@ -322,7 +307,7 @@ public abstract class YearView extends View {
     }
 
     /**
-     * 添加事件标记，来自Map
+     * Add event marker, from Map
      */
     private void addSchemesFromMap() {
         if (mDelegate.mSchemeDatesMap == null || mDelegate.mSchemeDatesMap.size() == 0) {
@@ -355,7 +340,7 @@ public abstract class YearView extends View {
     }
 
     /**
-     * 绘制
+     * draw
      *
      * @param canvas canvas
      */
@@ -377,7 +362,7 @@ public abstract class YearView extends View {
     }
 
     /**
-     * 绘制
+     * draw
      *
      * @param canvas canvas
      */
@@ -408,7 +393,7 @@ public abstract class YearView extends View {
     }
 
     /**
-     * 绘制月份数据
+     * Plot monthly data
      *
      * @param canvas canvas
      */
@@ -434,10 +419,10 @@ public abstract class YearView extends View {
 
 
     /**
-     * 开始绘制
+     * Start drawing
      *
      * @param canvas   canvas
-     * @param calendar 对应日历
+     * @param calendar Corresponding calendar
      * @param i        i
      * @param j        j
      * @param d        d
@@ -450,13 +435,13 @@ public abstract class YearView extends View {
         boolean hasScheme = calendar.hasScheme();
 
         if (hasScheme) {
-            //标记的日子
-            boolean isDrawSelected = false;//是否继续绘制选中的onDrawScheme
+            //Marked day
+            boolean isDrawSelected = false;//Whether to continue drawing the selected onDrawScheme
             if (isSelected) {
                 isDrawSelected = onDrawSelected(canvas, calendar, x, y, true);
             }
             if (isDrawSelected || !isSelected) {
-                //将画笔设置为标记颜色
+                //Set the brush as the marker color
                 mSchemePaint.setColor(calendar.getSchemeColor() != 0 ? calendar.getSchemeColor() : mDelegate.getSchemeThemeColor());
                 onDrawScheme(canvas, calendar, x, y);
             }
@@ -469,11 +454,11 @@ public abstract class YearView extends View {
     }
 
     /**
-     * 开始绘制前的钩子，这里做一些初始化的操作，每次绘制只调用一次，性能高效
-     * 没有需要可忽略不实现
-     * 例如：
-     * 1、需要绘制圆形标记事件背景，可以在这里计算半径
-     * 2、绘制矩形选中效果，也可以在这里计算矩形宽和高
+     * The hook before starting to draw, here are some initialization operations, and it is only called once for each drawing, and the performance is efficient
+     * No need can be ignored and not realized
+     * E.g：
+     * 1、Need to draw a circular marker event background, you can calculate the radius here
+     * 2、Draw rectangle selection effect, you can also calculate rectangle width and height here
      */
     protected void onPreviewHook() {
         // TODO: 2017/11/16
@@ -481,7 +466,7 @@ public abstract class YearView extends View {
 
 
     /**
-     * 绘制月份
+     * Plot month
      *
      * @param canvas canvas
      * @param year   year
@@ -495,7 +480,7 @@ public abstract class YearView extends View {
 
 
     /**
-     * 绘制年视图的周栏
+     * Plot the week column of the year view
      *
      * @param canvas canvas
      * @param week   week
@@ -508,37 +493,37 @@ public abstract class YearView extends View {
 
 
     /**
-     * 绘制选中的日期
+     * Draw the selected date
      *
      * @param canvas    canvas
-     * @param calendar  日历日历calendar
-     * @param x         日历Card x起点坐标
-     * @param y         日历Card y起点坐标
-     * @param hasScheme hasScheme 非标记的日期
-     * @return 是否绘制onDrawScheme，true or false
+     * @param calendar  Calendar calendar
+     * @param x         Calendar Card x starting point coordinates
+     * @param y         Calendar Card y starting point coordinates
+     * @param hasScheme hasScheme Unmarked date
+     * @return Whether to draw onDrawScheme，true or false
      */
     protected abstract boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme);
 
     /**
-     * 绘制标记的日期,这里可以是背景色，标记色什么的
+     * The date when the marker is drawn, here can be the background color, marker color or something
      *
      * @param canvas   canvas
-     * @param calendar 日历calendar
-     * @param x        日历Card x起点坐标
-     * @param y        日历Card y起点坐标
+     * @param calendar calendar
+     * @param x        Calendar Card x starting point coordinates
+     * @param y        Calendar Card y starting point coordinates
      */
     protected abstract void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y);
 
 
     /**
-     * 绘制日历文本
+     * Draw calendar text
      *
      * @param canvas     canvas
-     * @param calendar   日历calendar
-     * @param x          日历Card x起点坐标
-     * @param y          日历Card y起点坐标
-     * @param hasScheme  是否是标记的日期
-     * @param isSelected 是否选中
+     * @param calendar   calendar
+     * @param x          Calendar Card x starting point coordinates
+     * @param y          Calendar Card y starting point coordinates
+     * @param hasScheme  Is it a marked date
+     * @param isSelected Whether selected
      */
     protected abstract void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected);
 }

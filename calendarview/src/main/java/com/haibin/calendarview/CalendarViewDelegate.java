@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.content.Context;
@@ -30,105 +15,105 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Google规范化的属性委托,
- * 代码量多，但是不影响阅读性
+ * Google normalized attribute delegation,
+ * A lot of code, but does not affect the readability
  */
 final class CalendarViewDelegate {
 
     /**
-     * 周起始：周日
+     * Week start: Sunday
      */
     static final int WEEK_START_WITH_SUN = 1;
 
     /**
-     * 周起始：周一
+     * Week start: Monday
      */
     static final int WEEK_START_WITH_MON = 2;
 
     /**
-     * 周起始：周六
+     * Week start: Saturday
      */
     static final int WEEK_START_WITH_SAT = 7;
 
     /**
-     * 默认选择日期1号first_day_of_month
+     * The default selection date is first_day_of_month
      */
     static final int FIRST_DAY_OF_MONTH = 0;
 
     /**
-     * 跟随上个月last_select_day
+     * Follow last month last_select_day
      */
     static final int LAST_MONTH_VIEW_SELECT_DAY = 1;
 
     /**
-     * 跟随上个月last_select_day_ignore_current忽视今天
+     * Follow last month last_select_day_ignore_current ignore today
      */
     static final int LAST_MONTH_VIEW_SELECT_DAY_IGNORE_CURRENT = 2;
 
     private int mDefaultCalendarSelectDay;
 
     /**
-     * 周起始
+     * Week start
      */
     private int mWeekStart;
 
     /**
-     * 全部显示
+     * Show all
      */
     static final int MODE_ALL_MONTH = 0;
     /**
-     * 仅显示当前月份
+     * Show only the current month
      */
     static final int MODE_ONLY_CURRENT_MONTH = 1;
 
     /**
-     * 自适应显示，不会多出一行，但是会自动填充
+     * Adaptive display, there will be no extra line, but it will be automatically filled
      */
     static final int MODE_FIT_MONTH = 2;
 
     /**
-     * 月份显示模式
+     * Month display mode
      */
     private int mMonthViewShowMode;
 
 
     /**
-     * 默认选择模式
+     * Default selection mode
      */
     static final int SELECT_MODE_DEFAULT = 0;
 
     /**
-     * 单选模式
+     * Single selection mode
      */
     static final int SELECT_MODE_SINGLE = 1;
 
     /**
-     * 范围选择模式
+     * Range selection mode
      */
     static final int SELECT_MODE_RANGE = 2;
 
     /**
-     * 多选模式
+     * Multiple selection mode
      */
     static final int SELECT_MODE_MULTI = 3;
 
     /**
-     * 选择模式
+     * Select mode
      */
     private int mSelectMode;
 
 
     /**
-     * 支持转换的最小农历年份
+     * Minimum lunar year to support conversion
      */
     static final int MIN_YEAR = 1900;
     /**
-     * 支持转换的最大农历年份
+     * Maximum lunar year supported for conversion
      */
     private static final int MAX_YEAR = 2099;
 
     /**
-     * 各种字体颜色，看名字知道对应的地方
+     * Various font colors, look at the name to know the corresponding place
      */
     private int mCurDayTextColor,
             mCurDayLunarTextColor,
@@ -145,32 +130,32 @@ final class CalendarViewDelegate {
     private boolean preventLongPressedSelected;
 
     /**
-     * 日历内部左右padding
+     * Left and right padding inside the calendar
      */
     private int mCalendarPadding;
 
     /**
-     * 年视图字体大小
+     * Year view font size
      */
     private int mYearViewMonthTextSize,
             mYearViewDayTextSize,
             mYearViewWeekTextSize;
 
     /**
-     * 年视图月份高度和周的高度
+     * Year view month height and week height
      */
     private int mYearViewMonthHeight,
             mYearViewWeekHeight;
 
     /**
-     * 年视图一些margin和padding
+     * Year view some margin and padding
      */
     private int mYearViewPadding,
             mYearViewMonthMarginTop,
             mYearViewMonthMarginBottom;
 
     /**
-     * 年视图字体和标记颜色
+     * Year view font and mark color
      */
     private int mYearViewMonthTextColor,
             mYearViewDayTextColor,
@@ -180,117 +165,117 @@ final class CalendarViewDelegate {
             mYearViewWeekTextColor;
 
     /**
-     * 星期栏的背景、线的背景、年份背景
+     * The background of the week bar, the background of the line, the background of the year
      */
     private int mWeekLineBackground,
             mYearViewBackground,
             mWeekBackground;
 
     /**
-     * 星期栏Line margin
+     * Week Bar Line margin
      */
     private int mWeekLineMargin;
 
     /**
-     * 星期栏字体大小
+     * Day of the week font size
      */
     private int mWeekTextSize;
 
     /**
-     * 标记的主题色和选中的主题色
+     * Marked theme color and selected theme color
      */
     private int mSchemeThemeColor, mSelectedThemeColor;
 
 
     /**
-     * 自定义的日历路径
+     * Custom calendar path
      */
     private String mMonthViewClassPath;
 
     /**
-     * 月视图类
+     * Month view class
      */
     private Class<?> mMonthViewClass;
 
     /**
-     * 自定义周视图路径
+     * Custom week view path
      */
     private String mWeekViewClassPath;
 
     /**
-     * 周视图类
+     * Week view class
      */
     private Class<?> mWeekViewClass;
 
     /**
-     * 自定义年视图路径
+     * Custom year view path
      */
     private String mYearViewClassPath;
 
     /**
-     * 周视图类
+     * Week view class
      */
     private Class<?> mYearViewClass;
 
     /**
-     * 自定义周栏路径
+     * Customize Weekly Bar Path
      */
     private String mWeekBarClassPath;
 
     /**
-     * 自定义周栏
+     * Custom week column
      */
     private Class<?> mWeekBarClass;
 
     /**
-     * 年月视图是否打开
+     * Whether the year and month view is open
      */
     boolean isShowYearSelectedLayout;
 
     /**
-     * 标记文本
+     * Markup text
      */
     private String mSchemeText;
 
     /**
-     * 最小年份和最大年份
+     * Minimum year and maximum year
      */
     private int mMinYear, mMaxYear;
 
     /**
-     * 最小年份和最大年份对应最小月份和最大月份
+     * The minimum and maximum years correspond to the minimum and maximum months
      * when you want set 2015-07 to 2017-08
      */
     private int mMinYearMonth, mMaxYearMonth;
 
     /**
-     * 最小年份和最大年份对应最小天和最大天数
+     * The minimum and maximum years correspond to the minimum and maximum days
      * when you want set like 2015-07-08 to 2017-08-30
      */
     private int mMinYearDay, mMaxYearDay;
 
     /**
-     * 日期和农历文本大小
+     * Date and lunar text size
      */
     private int mDayTextSize, mLunarTextSize;
 
     /**
-     * 日历卡的项高度
+     * Item height of the calendar card
      */
     private int mCalendarItemHeight;
 
     /**
-     * 是否是全屏日历
+     * Is it a full screen calendar
      */
     private boolean isFullScreenCalendar;
 
     /**
-     * 星期栏的高度
+     * Height of day of the week
      */
     private int mWeekBarHeight;
 
     /**
-     * 今天的日子
+     * Today's day
      */
     private Calendar mCurrentDate;
 
@@ -300,92 +285,92 @@ final class CalendarViewDelegate {
             mYearViewScrollable;
 
     /**
-     * 当前月份和周视图的item位置
+     * Item position of current month and week view
      */
     int mCurrentMonthViewItem;
 
     /**
-     * 标记的日期,数量巨大，请使用这个
+     * The marked date is huge, please use this
      */
     Map<String, Calendar> mSchemeDatesMap;
 
     /**
-     * 日期拦截事件
+     * Date interception event
      */
     CalendarView.OnCalendarInterceptListener mCalendarInterceptListener;
 
     /**
-     * 日期选中监听
+     * Date selected to monitor
      */
     CalendarView.OnCalendarSelectListener mCalendarSelectListener;
 
     /**
-     * 范围选择
+     * Range selection
      */
     CalendarView.OnCalendarRangeSelectListener mCalendarRangeSelectListener;
 
 
     /**
-     * 多选选择事件
+     * Multiple selection event
      */
     CalendarView.OnCalendarMultiSelectListener mCalendarMultiSelectListener;
 
     /**
-     * 外部日期长按事件
+     * External date long press event
      */
     CalendarView.OnCalendarLongClickListener mCalendarLongClickListener;
 
     /**
-     * 内部日期切换监听，用于内部更新计算
+     * Internal date switching monitor for internal update calculation
      */
     CalendarView.OnInnerDateSelectedListener mInnerListener;
 
     /**
-     * 快速年份切换
+     * Fast year switching
      */
     CalendarView.OnYearChangeListener mYearChangeListener;
 
 
     /**
-     * 月份切换事件
+     * Month switching event
      */
     CalendarView.OnMonthChangeListener mMonthChangeListener;
 
     /**
-     * 周视图改变事件
+     * Week view change event
      */
     CalendarView.OnWeekChangeListener mWeekChangeListener;
 
     /**
-     * 视图改变事件
+     * View change event
      */
     CalendarView.OnViewChangeListener mViewChangeListener;
 
 
     /**
-     * 年视图改变事件
+     * Year view change event
      */
     CalendarView.OnYearViewChangeListener mYearViewChangeListener;
 
     /**
-     * 保存选中的日期
+     * Save the selected date
      */
     Calendar mSelectedCalendar;
 
     /**
-     * 保存标记位置
+     * Save mark position
      */
     Calendar mIndexCalendar;
 
     /**
-     * 多选日历
+     * Multi-select calendar
      */
     Map<String, Calendar> mSelectedCalendars = new HashMap<>();
 
     private int mMaxMultiSelectSize;
 
     /**
-     * 选择范围日历
+     * Select range calendar
      */
     Calendar mSelectedStartRangeCalendar, mSelectedEndRangeCalendar;
 
@@ -436,7 +421,7 @@ final class CalendarViewDelegate {
         mYearViewBackground = array.getColor(R.styleable.CalendarView_year_view_background, Color.WHITE);
         mWeekTextColor = array.getColor(R.styleable.CalendarView_week_text_color, 0xFF333333);
 
-        mCurDayTextColor = array.getColor(R.styleable.CalendarView_current_day_text_color, Color.RED);
+        mCurDayTextColor = array.getColor(R.styleable.CalendarView_current_day_text_color, Color.GREEN);
         mCurDayLunarTextColor = array.getColor(R.styleable.CalendarView_current_day_lunar_text_color, Color.RED);
 
         mSelectedThemeColor = array.getColor(R.styleable.CalendarView_selected_theme_color, 0x50CFCFCF);
@@ -835,16 +820,16 @@ final class CalendarViewDelegate {
     }
 
     /**
-     * 选择模式
+     * Select mode
      *
-     * @return 选择模式
+     * @return selection mode
      */
     int getSelectMode() {
         return mSelectMode;
     }
 
     /**
-     * 设置选择模式
+     * Set selection mode
      *
      * @param mSelectMode mSelectMode
      */
@@ -998,7 +983,7 @@ final class CalendarViewDelegate {
     }
 
     /**
-     * 添加事件标记，来自Map
+     * Add event marker, from Map
      */
     final void addSchemesFromMap(List<Calendar> mItems) {
         if (mSchemeDatesMap == null || mSchemeDatesMap.size() == 0) {
@@ -1022,7 +1007,7 @@ final class CalendarViewDelegate {
     }
 
     /**
-     * 添加数据
+     * adding data
      *
      * @param mSchemeDates mSchemeDates
      */
@@ -1044,7 +1029,7 @@ final class CalendarViewDelegate {
     }
 
     /**
-     * 清楚选择
+     * Choose clearly
      */
     final void clearSelectRange() {
         mSelectedStartRangeCalendar = null;
@@ -1052,9 +1037,9 @@ final class CalendarViewDelegate {
     }
 
     /**
-     * 获得选中范围
+     * Get the selected range
      *
-     * @return 选中范围
+     * @return Selected range
      */
     final List<Calendar> getSelectCalendarRange() {
         if (mSelectMode != SELECT_MODE_RANGE) {
@@ -1072,7 +1057,7 @@ final class CalendarViewDelegate {
                 mSelectedStartRangeCalendar.getMonth() - 1,
                 mSelectedStartRangeCalendar.getDay());//
 
-        long startTimeMills = date.getTimeInMillis();//获得起始时间戳
+        long startTimeMills = date.getTimeInMillis();//Get the start timestamp
 
 
         date.set(mSelectedEndRangeCalendar.getYear(),

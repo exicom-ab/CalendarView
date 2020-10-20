@@ -1,22 +1,7 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 /**
- * 农历计算方法
+ * Lunar calendar calculation method
  */
 public final class LunarUtil {
 
@@ -90,12 +75,12 @@ public final class LunarUtil {
     }
 
     /**
-     * 公历转农历 Solar To Lunar
+     * Solar To Lunar
      *
-     * @param year  公历年
-     * @param month 公历月
-     * @param day   公历日
-     * @return [0]农历年 [1]农历月 [2]农历日 [3]是否闰月 0 false : 1 true
+     * @param year Gregorian calendar year
+     * @param month Gregorian calendar month
+     * @param day Gregorian calendar day
+     * @return [0] Chinese calendar year [1] Chinese calendar month [2] Chinese calendar day [3] Whether it is a leap month 0 false: 1 true
      */
     @SuppressWarnings("all")
     public static int[] solarToLunar(int year, int month, int day) {
@@ -146,13 +131,13 @@ public final class LunarUtil {
 
 
     /**
-     * 农历转公历
+     * Lunar calendar to Gregorian calendar
      *
-     * @param lunarYear  农历年
-     * @param lunarMonth 农历月
-     * @param lunarDay   农历天
-     * @param isLeap     是否是闰年 0 false : 1 true
-     * @return [0]新历年 [1]新历月 [2]新历日 [3]是否闰月 0 false : 1 true
+     * @param lunarYear lunar year
+     * @param lunarMonth lunar month
+     * @param lunarDay Lunar Day
+     * @param isLeap is it a leap year 0 false: 1 true
+     * @return [0] New calendar year [1] New calendar month [2] New calendar day [3] Whether it is a leap month 0 false: 1 true
      */
     @SuppressWarnings("unused")
     public static int[] lunarToSolar(int lunarYear, int lunarMonth, int lunarDay, boolean isLeap) {

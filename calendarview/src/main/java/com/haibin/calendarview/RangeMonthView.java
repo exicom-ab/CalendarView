@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.content.Context;
@@ -20,8 +5,7 @@ import android.graphics.Canvas;
 import android.view.View;
 
 /**
- * 范围选择月视图
- * Created by huanghaibin on 2018/9/11.
+ * Range selection month view
  */
 public abstract class RangeMonthView extends BaseMonthView {
 
@@ -61,12 +45,12 @@ public abstract class RangeMonthView extends BaseMonthView {
     }
 
     /**
-     * 开始绘制
+     * Start drawing
      *
-     * @param canvas   canvas
-     * @param calendar 对应日历
-     * @param i        i
-     * @param j        j
+     * @param canvas canvas
+     * @param calendar corresponds to the calendar
+     * @param i i
+     * @param j j
      */
     private void draw(Canvas canvas, Calendar calendar, int i, int j) {
         int x = j * mItemWidth + mDelegate.getCalendarPadding();
@@ -78,13 +62,13 @@ public abstract class RangeMonthView extends BaseMonthView {
         boolean isNextSelected = isSelectNextCalendar(calendar);
 
         if (hasScheme) {
-            //标记的日子
-            boolean isDrawSelected = false;//是否继续绘制选中的onDrawScheme
+            //Marked day
+            boolean isDrawSelected = false;//Whether to continue drawing the selected onDrawScheme
             if (isSelected) {
                 isDrawSelected = onDrawSelected(canvas, calendar, x, y, true, isPreSelected, isNextSelected);
             }
             if (isDrawSelected || !isSelected) {
-                //将画笔设置为标记颜色
+                //Set the brush as the marker color
                 mSchemePaint.setColor(calendar.getSchemeColor() != 0 ? calendar.getSchemeColor() : mDelegate.getSchemeThemeColor());
                 onDrawScheme(canvas, calendar, x, y, true);
             }
@@ -97,10 +81,10 @@ public abstract class RangeMonthView extends BaseMonthView {
     }
 
     /**
-     * 日历是否被选中
+     * Whether the calendar is selected
      *
      * @param calendar calendar
-     * @return 日历是否被选中
+     * @return whether the calendar is selected
      */
     protected boolean isCalendarSelected(Calendar calendar) {
         if (mDelegate.mSelectedStartRangeCalendar == null) {
@@ -144,7 +128,7 @@ public abstract class RangeMonthView extends BaseMonthView {
             return;
         }
 
-        //优先判断各种直接return的情况，减少代码深度
+        //Prioritize various direct return situations to reduce code depth
         if (mDelegate.mSelectedStartRangeCalendar != null && mDelegate.mSelectedEndRangeCalendar == null) {
             int minDiffer = CalendarUtil.differ(calendar, mDelegate.mSelectedStartRangeCalendar);
             if (minDiffer >= 0 && mDelegate.getMinSelectRange() != -1 && mDelegate.getMinSelectRange() > minDiffer + 1) {
@@ -212,10 +196,10 @@ public abstract class RangeMonthView extends BaseMonthView {
     }
 
     /**
-     * 上一个日期是否选中
+     * Whether the previous date is selected
      *
-     * @param calendar 当前日期
-     * @return 上一个日期是否选中
+     * @param calendar current date
+     * @return Whether the previous date is selected
      */
     protected final boolean isSelectPreCalendar(Calendar calendar) {
         Calendar preCalendar = CalendarUtil.getPreCalendar(calendar);
@@ -225,10 +209,10 @@ public abstract class RangeMonthView extends BaseMonthView {
     }
 
     /**
-     * 下一个日期是否选中
+     * Whether the next date is selected
      *
-     * @param calendar 当前日期
-     * @return 下一个日期是否选中
+     * @param calendar current date
+     * @return whether the next date is selected
      */
     protected final boolean isSelectNextCalendar(Calendar calendar) {
         Calendar nextCalendar = CalendarUtil.getNextCalendar(calendar);
@@ -238,41 +222,41 @@ public abstract class RangeMonthView extends BaseMonthView {
     }
 
     /**
-     * 绘制选中的日期
+     * Draw the selected date
      *
-     * @param canvas         canvas
-     * @param calendar       日历日历calendar
-     * @param x              日历Card x起点坐标
-     * @param y              日历Card y起点坐标
-     * @param hasScheme      hasScheme 非标记的日期
-     * @param isSelectedPre  上一个日期是否选中
-     * @param isSelectedNext 下一个日期是否选中
-     * @return 是否继续绘制onDrawScheme，true or false
+     * @param canvas canvas
+     * @param calendar calendar
+     * @param x Calendar Card x starting point coordinates
+     * @param y Calendar Card y starting point coordinates
+     * @param hasScheme hasScheme unmarked date
+     * @param isSelectedPre Whether the previous date is selected
+     * @param isSelectedNext Whether the next date is selected
+     * @return Whether to continue drawing onDrawScheme, true or false
      */
     protected abstract boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme,
                                               boolean isSelectedPre, boolean isSelectedNext);
 
     /**
-     * 绘制标记的日期,这里可以是背景色，标记色什么的
+     * The date of drawing the mark, here can be the background color, mark color or something
      *
-     * @param canvas     canvas
-     * @param calendar   日历calendar
-     * @param x          日历Card x起点坐标
-     * @param y          日历Card y起点坐标
-     * @param isSelected 是否选中
+     * @param canvas canvas
+     * @param calendar calendar
+     * @param x Calendar Card x starting point coordinates
+     * @param y Calendar Card y starting point coordinates
+     * @param isSelected is selected
      */
     protected abstract void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y, boolean isSelected);
 
 
     /**
-     * 绘制日历文本
+     * Draw calendar text
      *
-     * @param canvas     canvas
-     * @param calendar   日历calendar
-     * @param x          日历Card x起点坐标
-     * @param y          日历Card y起点坐标
-     * @param hasScheme  是否是标记的日期
-     * @param isSelected 是否选中
+     * @param canvas canvas
+     * @param calendar calendar
+     * @param x Calendar Card x starting point coordinates
+     * @param y Calendar Card y starting point coordinates
+     * @param hasScheme is the date marked
+     * @param isSelected is selected
      */
     protected abstract void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected);
 }

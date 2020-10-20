@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.annotation.SuppressLint;
@@ -24,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 一些日期辅助计算工具
+ * Some date calculation tools
  */
 final class CalendarUtil {
 
@@ -37,10 +22,10 @@ final class CalendarUtil {
     }
 
     /**
-     * 判断一个日期是否是周末，即周六日
+     * Determine whether a date is a weekend, that is, Saturday and Sunday
      *
      * @param calendar calendar
-     * @return 判断一个日期是否是周末，即周六日
+     * @return judge whether a date is a weekend, that is, Saturday and Sunday
      */
     static boolean isWeekend(Calendar calendar) {
         int week = getWeekFormCalendar(calendar);
@@ -48,26 +33,26 @@ final class CalendarUtil {
     }
 
     /**
-     * 获取某月的天数
+     * Get the number of days in a month
      *
-     * @param year  年
-     * @param month 月
-     * @return 某月的天数
+     * @param year
+     * @param month month
+     * @return the number of days in a month
      */
     static int getMonthDaysCount(int year, int month) {
         int count = 0;
-        //判断大月份
+        //Judging the big month
         if (month == 1 || month == 3 || month == 5 || month == 7
                 || month == 8 || month == 10 || month == 12) {
             count = 31;
         }
 
-        //判断小月
+        //Judging Satsuki
         if (month == 4 || month == 6 || month == 9 || month == 11) {
             count = 30;
         }
 
-        //判断平年与闰年
+        //Judging the average year and leap year
         if (month == 2) {
             if (isLeapYear(year)) {
                 count = 29;
@@ -80,10 +65,10 @@ final class CalendarUtil {
 
 
     /**
-     * 是否是闰年
+     * Is it a leap year
      *
      * @param year year
-     * @return 是否是闰年
+     * @return is it a leap year
      */
     static boolean isLeapYear(int year) {
         return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
@@ -101,13 +86,13 @@ final class CalendarUtil {
     }
 
     /**
-     * 获取月视图的确切高度
+     * Get the exact height of the month view
      * Test pass
      *
-     * @param year       年
-     * @param month      月
-     * @param itemHeight 每项的高度
-     * @return 不需要多余行的高度
+     * @param year
+     * @param month month
+     * @param itemHeight The height of each item
+     * @return does not require the height of extra rows
      */
     static int getMonthViewHeight(int year, int month, int itemHeight, int weekStartWith) {
         java.util.Calendar date = java.util.Calendar.getInstance();
@@ -119,13 +104,13 @@ final class CalendarUtil {
     }
 
     /**
-     * 获取月视图的确切高度
+     * Get the exact height of the month view
      * Test pass
      *
-     * @param year       年
-     * @param month      月
-     * @param itemHeight 每项的高度
-     * @return 不需要多余行的高度
+     * @param year
+     * @param month month
+     * @param itemHeight The height of each item
+     * @return does not require the height of extra rows
      */
     static int getMonthViewHeight(int year, int month, int itemHeight, int weekStartWith, int mode) {
         if (mode == CalendarViewDelegate.MODE_ALL_MONTH) {
@@ -135,33 +120,33 @@ final class CalendarUtil {
     }
 
     /**
-     * 获取某天在该月的第几周,换言之就是获取这一天在该月视图的第几行,第几周，根据周起始动态获取
-     * Test pass，单元测试通过
+     * Get the week of a certain day in the month, in other words, get the row and week of the month view of the day, and get it dynamically according to the start of the week
+     * Test pass, unit test passed
      *
-     * @param calendar  calendar
-     * @param weekStart 其实星期是哪一天？
-     * @return 获取某天在该月的第几周 the week line in MonthView
+     * @param calendar calendar
+     * @param weekStart What day is the week actually?
+     * @return Get the week line in MonthView of a certain day in the week of the month
      */
     static int getWeekFromDayInMonth(Calendar calendar, int weekStart) {
         java.util.Calendar date = java.util.Calendar.getInstance();
         date.set(calendar.getYear(), calendar.getMonth() - 1, 1,12,0,0);
-        //该月第一天为星期几,星期天 == 0
+        //The first day of the month is the day of the week, and Sunday == 0
         int diff = getMonthViewStartDiff(calendar, weekStart);
         return (calendar.getDay() + diff - 1) / 7 + 1;
     }
 
     /**
-     * 获取上一个日子
+     * Get the previous day
      *
      * @param calendar calendar
-     * @return 获取上一个日子
+     * @return Get the previous day
      */
     static Calendar getPreCalendar(Calendar calendar) {
         java.util.Calendar date = java.util.Calendar.getInstance();
 
         date.set(calendar.getYear(), calendar.getMonth() - 1, calendar.getDay(),12,0,0);//
 
-        long timeMills = date.getTimeInMillis();//获得起始时间戳
+        long timeMills = date.getTimeInMillis();//Get the start timestamp
 
         date.setTimeInMillis(timeMills - ONE_DAY);
 
@@ -191,13 +176,13 @@ final class CalendarUtil {
     }
 
     /**
-     * DAY_OF_WEEK return  1  2  3 	4  5  6	 7，偏移了一位
-     * 获取日期所在月视图对应的起始偏移量
+     * DAY_OF_WEEK return 1 2 3 4 5 6 7, offset by one
+     * Get the starting offset corresponding to the month view where the date is located
      * Test pass
      *
-     * @param calendar  calendar
-     * @param weekStart weekStart 星期的起始
-     * @return 获取日期所在月视图对应的起始偏移量 the start diff with MonthView
+     * @param calendar calendar
+     * @param weekStart weekStart week start
+     * @return Get the start diff with MonthView corresponding to the month view where the date is located
      */
     static int getMonthViewStartDiff(Calendar calendar, int weekStart) {
         java.util.Calendar date = java.util.Calendar.getInstance();
@@ -214,14 +199,14 @@ final class CalendarUtil {
 
 
     /**
-     * DAY_OF_WEEK return  1  2  3 	4  5  6	 7，偏移了一位
-     * 获取日期所在月视图对应的起始偏移量
+     * DAY_OF_WEEK return 1 2 3 4 5 6 7, offset by one
+     * Get the starting offset corresponding to the month view where the date is located
      * Test pass
      *
-     * @param year      年
-     * @param month     月
-     * @param weekStart 周起始
-     * @return 获取日期所在月视图对应的起始偏移量 the start diff with MonthView
+     * @param year
+     * @param month month
+     * @param weekStart week start
+     * @return Get the start diff with MonthView corresponding to the month view where the date is located
      */
     static int getMonthViewStartDiff(int year, int month, int weekStart) {
         java.util.Calendar date = java.util.Calendar.getInstance();
@@ -238,14 +223,14 @@ final class CalendarUtil {
 
 
     /**
-     * DAY_OF_WEEK return  1  2  3 	4  5  6	 7，偏移了一位
-     * 获取日期月份对应的结束偏移量,用于计算两个年份之间总共有多少周，不用于MonthView
+     * DAY_OF_WEEK return 1 2 3 4 5 6 7, offset by one
+     * Get the end offset corresponding to the date and month, used to calculate the total number of weeks between the two years, not used in MonthView
      * Test pass
      *
-     * @param year      年
-     * @param month     月
-     * @param weekStart 周起始
-     * @return 获取日期月份对应的结束偏移量 the end diff in Month not MonthView
+     * @param year
+     * @param month month
+     * @param weekStart week start
+     * @return Get the end diff corresponding to the date month the end diff in Month not MonthView
      */
     static int getMonthEndDiff(int year, int month, int weekStart) {
         return getMonthEndDiff(year, month, getMonthDaysCount(year, month), weekStart);
@@ -253,14 +238,14 @@ final class CalendarUtil {
 
 
     /**
-     * DAY_OF_WEEK return  1  2  3 	4  5  6	 7，偏移了一位
-     * 获取日期月份对应的结束偏移量,用于计算两个年份之间总共有多少周，不用于MonthView
+     * DAY_OF_WEEK return 1 2 3 4 5 6 7, offset by one
+     * Get the end offset corresponding to the date and month, used to calculate the total number of weeks between the two years, not used in MonthView
      * Test pass
      *
-     * @param year      年
-     * @param month     月
-     * @param weekStart 周起始
-     * @return 获取日期月份对应的结束偏移量 the end diff in Month not MonthView
+     * @param year
+     * @param month month
+     * @param weekStart week start
+     * @return Get the end diff corresponding to the date month the end diff in Month not MonthView
      */
     private static int getMonthEndDiff(int year, int month, int day, int weekStart) {
         java.util.Calendar date = java.util.Calendar.getInstance();
@@ -276,11 +261,11 @@ final class CalendarUtil {
     }
 
     /**
-     * 获取某个日期是星期几
-     * 测试通过
+     * Get the day of the week for a certain date
+     * Test passed
      *
-     * @param calendar 某个日期
-     * @return 返回某个日期是星期几
+     * @param calendar a certain date
+     * @return returns the day of the week for a certain date
      */
     static int getWeekFormCalendar(Calendar calendar) {
         java.util.Calendar date = java.util.Calendar.getInstance();
@@ -290,29 +275,29 @@ final class CalendarUtil {
 
 
     /**
-     * 获取周视图的切换默认选项位置 WeekView index
-     * 测试通过 test pass
+     * Get the switch default option position of week view WeekView index
+     * Test pass
      *
-     * @param calendar  calendar
+     * @param calendar calendar
      * @param weekStart weekStart
-     * @return 获取周视图的切换默认选项位置
+     * @return Get the switch default option position of the week view
      */
     static int getWeekViewIndexFromCalendar(Calendar calendar, int weekStart) {
         return getWeekViewStartDiff(calendar.getYear(), calendar.getMonth(), calendar.getDay(), weekStart);
     }
 
     /**
-     * 是否在日期范围內
-     * 测试通过 test pass
+     * Is it within the date range
+     * Test pass
      *
-     * @param calendar     calendar
-     * @param minYear      minYear
-     * @param minYearDay   最小年份天
+     * @param calendar calendar
+     * @param minYear minYear
+     * @param minYearDay minimum year day
      * @param minYearMonth minYearMonth
-     * @param maxYear      maxYear
+     * @param maxYear maxYear
      * @param maxYearMonth maxYearMonth
-     * @param maxYearDay   最大年份天
-     * @return 是否在日期范围內
+     * @param maxYearDay maximum year day
+     * @return is within the date range
      */
     static boolean isCalendarInRange(Calendar calendar,
                                      int minYear, int minYearMonth, int minYearDay,
@@ -328,30 +313,30 @@ final class CalendarUtil {
     }
 
     /**
-     * 获取两个日期之间一共有多少周，
-     * 注意周起始周一、周日、周六
-     * 测试通过 test pass
+     * Get the total number of weeks between two dates,
+     * Note the beginning of the week on Monday, Sunday, and Saturday
+     * Test pass
      *
-     * @param minYear      minYear 最小年份
-     * @param minYearMonth maxYear 最小年份月份
-     * @param minYearDay   最小年份天
-     * @param maxYear      maxYear 最大年份
-     * @param maxYearMonth maxYear 最大年份月份
-     * @param maxYearDay   最大年份天
-     * @param weekStart    周起始
-     * @return 周数用于WeekViewPager itemCount
+     * @param minYear minYear minimum year
+     * @param minYearMonth maxYear minimum year month
+     * @param minYearDay minimum year day
+     * @param maxYear maxYear maximum year
+     * @param maxYearMonth maxYear maximum year month
+     * @param maxYearDay maximum year day
+     * @param weekStart week start
+     * @return week number is used for WeekViewPager itemCount
      */
     static int getWeekCountBetweenBothCalendar(int minYear, int minYearMonth, int minYearDay,
                                                int maxYear, int maxYearMonth, int maxYearDay,
                                                int weekStart) {
         java.util.Calendar date = java.util.Calendar.getInstance();
         date.set(minYear, minYearMonth - 1, minYearDay);
-        long minTimeMills = date.getTimeInMillis();//给定时间戳
+        long minTimeMills = date.getTimeInMillis();//Given timestamp
         int preDiff = getWeekViewStartDiff(minYear, minYearMonth, minYearDay, weekStart);
 
         date.set(maxYear, maxYearMonth - 1, maxYearDay);
 
-        long maxTimeMills = date.getTimeInMillis();//给定时间戳
+        long maxTimeMills = date.getTimeInMillis();//Given timestamp
 
         int nextDiff = getWeekViewEndDiff(maxYear, maxYearMonth, maxYearDay, weekStart);
 
@@ -364,36 +349,36 @@ final class CalendarUtil {
 
 
     /**
-     * 根据日期获取距离最小日期在第几周
-     * 用来设置 WeekView currentItem
-     * 测试通过 test pass
+     * According to the date to get the smallest date in the first few weeks
+     * Used to set WeekView currentItem
+     * Test pass
      *
-     * @param calendar     calendar
-     * @param minYear      minYear 最小年份
-     * @param minYearMonth maxYear 最小年份月份
-     * @param minYearDay   最小年份天
-     * @param weekStart    周起始
-     * @return 返回两个年份中第几周 the WeekView currentItem
+     * @param calendar calendar
+     * @param minYear minYear minimum year
+     * @param minYearMonth maxYear minimum year month
+     * @param minYearDay minimum year day
+     * @param weekStart week start
+     * @return returns the WeekView currentItem in the week of the two years
      */
     static int getWeekFromCalendarStartWithMinCalendar(Calendar calendar,
                                                        int minYear, int minYearMonth, int minYearDay,
                                                        int weekStart) {
         java.util.Calendar date = java.util.Calendar.getInstance();
-        date.set(minYear, minYearMonth - 1, minYearDay);//起始日期
-        long firstTimeMill = date.getTimeInMillis();//获得范围起始时间戳
+        date.set(minYear, minYearMonth - 1, minYearDay);//Start date
+        long firstTimeMill = date.getTimeInMillis();//Get range start timestamp
 
-        int preDiff = getWeekViewStartDiff(minYear, minYearMonth, minYearDay, weekStart);//范围起始的周偏移量
+        int preDiff = getWeekViewStartDiff(minYear, minYearMonth, minYearDay, weekStart);//Week offset from the start of the range
 
         int weekStartDiff = getWeekViewStartDiff(calendar.getYear(),
                 calendar.getMonth(),
                 calendar.getDay(),
-                weekStart);//获取点击的日子在周视图的起始，为了兼容全球时区，最大日差为一天，如果周起始偏差weekStartDiff=0，则日期加1
+                weekStart);//Get the clicked day at the start of the week view. In order to be compatible with the global time zone, the maximum daily difference is one day. If the week start deviation weekStartDiff=0, the date is increased by 1
 
         date.set(calendar.getYear(),
                 calendar.getMonth() - 1,
                 weekStartDiff == 0 ? calendar.getDay() + 1 : calendar.getDay());
 
-        long curTimeMills = date.getTimeInMillis();//给定时间戳
+        long curTimeMills = date.getTimeInMillis();//Given timestamp
 
         int c = (int) ((curTimeMills - firstTimeMill) / ONE_DAY);
 
@@ -403,22 +388,22 @@ final class CalendarUtil {
     }
 
     /**
-     * 根据星期数和最小日期推算出该星期的第一天，
-     * 为了防止夏令时，导致的时间提前和延后1-2小时，导致日期出现误差1天，因此吧hourOfDay = 12
-     * //测试通过 Test pass
+     * Calculate the first day of the week based on the number of weeks and the minimum date,
+     * In order to prevent the daylight saving time, the time will be advanced and delayed by 1-2 hours, resulting in an error of 1 day in the date, so hourOfDay = 12
+     * //Test pass Test pass
      *
-     * @param minYear      最小年份如2017
-     * @param minYearMonth maxYear 最小年份月份，like : 2017-07
-     * @param minYearDay   最小年份天
-     * @param week         从最小年份minYear月minYearMonth 日1 开始的第几周 week > 0
-     * @return 该星期的第一天日期
+     * @param minYear minimum year such as 2017
+     * @param minYearMonth maxYear minimum year and month, like: 2017-07
+     * @param minYearDay minimum year day
+     * @param week Weeks starting from minYear month minYearMonth day 1 of the minimum year week> 0
+     * @return the first day of the week
      */
     static Calendar getFirstCalendarStartWithMinCalendar(int minYear, int minYearMonth, int minYearDay, int week, int weekStart) {
         java.util.Calendar date = java.util.Calendar.getInstance();
 
         date.set(minYear, minYearMonth - 1, minYearDay, 12, 0);//
 
-        long firstTimeMills = date.getTimeInMillis();//获得起始时间戳
+        long firstTimeMills = date.getTimeInMillis();//Get the start timestamp
 
 
         long weekTimeMills = (week - 1) * 7 * ONE_DAY;
@@ -444,11 +429,11 @@ final class CalendarUtil {
 
 
     /**
-     * 是否在日期范围内
+     * Is it within the date range
      *
      * @param calendar calendar
      * @param delegate delegate
-     * @return 是否在日期范围内
+     * @return is within the date range
      */
     static boolean isCalendarInRange(Calendar calendar, CalendarViewDelegate delegate) {
         return isCalendarInRange(calendar,
@@ -457,15 +442,15 @@ final class CalendarUtil {
     }
 
     /**
-     * 是否在日期范围內
+     * Is it within the date range
      *
-     * @param year         year
-     * @param month        month
-     * @param minYear      minYear
+     * @param year year
+     * @param month month
+     * @param minYear minYear
      * @param minYearMonth minYearMonth
-     * @param maxYear      maxYear
+     * @param maxYear maxYear
      * @param maxYearMonth maxYearMonth
-     * @return 是否在日期范围內
+     * @return is within the date range
      */
     static boolean isMonthInRange(int year, int month, int minYear, int minYearMonth, int maxYear, int maxYearMonth) {
         return !(year < minYear || year > maxYear) &&
@@ -474,12 +459,12 @@ final class CalendarUtil {
     }
 
     /**
-     * 运算 calendar1 - calendar2
+     * Operation calendar1-calendar2
      * test Pass
      *
      * @param calendar1 calendar1
      * @param calendar2 calendar2
-     * @return calendar1 - calendar2
+     * @return calendar1-calendar2
      */
     static int differ(Calendar calendar1, Calendar calendar2) {
         if (calendar1 == null) {
@@ -502,14 +487,14 @@ final class CalendarUtil {
     }
 
     /**
-     * 比较日期大小
+     * Compare date size
      *
-     * @param minYear      minYear
+     * @param minYear minYear
      * @param minYearMonth minYearMonth
-     * @param minYearDay   minYearDay
-     * @param maxYear      maxYear
+     * @param minYearDay minYearDay
+     * @param maxYear maxYear
      * @param maxYearMonth maxYearMonth
-     * @param maxYearDay   maxYearDay
+     * @param maxYearDay maxYearDay
      * @return -1 0 1
      */
     static int compareTo(int minYear, int minYearMonth, int minYearDay,
@@ -527,22 +512,22 @@ final class CalendarUtil {
     }
 
     /**
-     * 为月视图初始化日历
+     * Initialize calendar for month view
      *
-     * @param year        year
-     * @param month       month
+     * @param year year
+     * @param month month
      * @param currentDate currentDate
-     * @param weekStar    weekStar
-     * @return 为月视图初始化日历项
+     * @param weekStar weekStar
+     * @return initialize calendar entry for month view
      */
     static List<Calendar> initCalendarForMonthView(int year, int month, Calendar currentDate, int weekStar) {
         java.util.Calendar date = java.util.Calendar.getInstance();
 
         date.set(year, month - 1, 1);
 
-        int mPreDiff = getMonthViewStartDiff(year, month, weekStar);//获取月视图其实偏移量
+        int mPreDiff = getMonthViewStartDiff(year, month, weekStar);//Get the actual offset of the month view
 
-        int monthDayCount = getMonthDaysCount(year, month);//获取月份真实天数
+        int monthDayCount = getMonthDaysCount(year, month);//Get the true number of days in the month
 
         int preYear, preMonth;
         int nextYear, nextMonth;
@@ -552,19 +537,19 @@ final class CalendarUtil {
         List<Calendar> mItems = new ArrayList<>();
 
         int preMonthDaysCount;
-        if (month == 1) {//如果是1月
+        if (month == 1) {//If it's January
             preYear = year - 1;
             preMonth = 12;
             nextYear = year;
             nextMonth = month + 1;
             preMonthDaysCount = mPreDiff == 0 ? 0 : CalendarUtil.getMonthDaysCount(preYear, preMonth);
-        } else if (month == 12) {//如果是12月
+        } else if (month == 12) {//If it's December
             preYear = year;
             preMonth = month - 1;
             nextYear = year + 1;
             nextMonth = 1;
             preMonthDaysCount = mPreDiff == 0 ? 0 : CalendarUtil.getMonthDaysCount(preYear, preMonth);
-        } else {//平常
+        } else {//usually
             preYear = year;
             preMonth = month - 1;
             nextYear = year;
@@ -626,22 +611,22 @@ final class CalendarUtil {
     }
 
     /**
-     * 生成周视图的7个item
+     * 7 items to generate weekly view
      *
-     * @param calendar  周视图的第一个日子calendar，所以往后推迟6天，生成周视图
+     * @param calendar The first day of the week view calendar, so it will be postponed for 6 days and the week view will be generated
      * @param mDelegate mDelegate
      * @param weekStart weekStart
-     * @return 生成周视图的7个item
+     * @return generates 7 items of week view
      */
     @SuppressWarnings("unused")
     static List<Calendar> initCalendarForWeekView(Calendar calendar, CalendarViewDelegate mDelegate, int weekStart) {
 
-        java.util.Calendar date = java.util.Calendar.getInstance();//当天时间
+        java.util.Calendar date = java.util.Calendar.getInstance();//Time of day
         date.set(calendar.getYear(), calendar.getMonth() - 1, calendar.getDay(), 12, 0);
-        long curDateMills = date.getTimeInMillis();//生成选择的日期时间戳
+        long curDateMills = date.getTimeInMillis();//Generate selected date and time stamp
 
         //int weekEndDiff = getWeekViewEndDiff(calendar.getYear(), calendar.getMonth(), calendar.getDay(), weekStart);
-        //weekEndDiff 例如周起始为周日1，当前为2020-04-01，周三，则weekEndDiff为本周结束相差今天三天，weekEndDiff=3
+        //weekEndDiff For example, the start of the week is Sunday 1, and the current is 2020-04-01. On Wednesday, weekEndDiff is three days after the end of the week, weekEndDiff=3
         int weekEndDiff = 6;
         List<Calendar> mItems = new ArrayList<>();
 
@@ -675,14 +660,14 @@ final class CalendarUtil {
     }
 
     /**
-     * 单元测试通过
-     * 从选定的日期，获取周视图起始偏移量，用来生成周视图布局
+     * Unit test passed
+     * Get the starting offset of the week view from the selected date to generate the week view layout
      *
-     * @param year      year
-     * @param month     month
-     * @param day       day
-     * @param weekStart 周起始，1，2，7 日 一 六
-     * @return 获取周视图起始偏移量，用来生成周视图布局
+     * @param year year
+     * @param month month
+     * @param day day
+     * @param weekStart Week start, 1, 2, 7 Monday, Saturday
+     * @return Get the starting offset of the week view, used to generate the week view layout
      */
     private static int getWeekViewStartDiff(int year, int month, int day, int weekStart) {
         java.util.Calendar date = java.util.Calendar.getInstance();
@@ -699,15 +684,15 @@ final class CalendarUtil {
 
 
     /**
-     * 单元测试通过
-     * 从选定的日期，获取周视图结束偏移量，用来生成周视图布局
-     * 为了兼容DST，DST时区可能出现时间偏移1-2小时，从而导致凌晨时候实际获得的日期往前或者往后推移了一天，
-     * 日历没有时和分的概念，因此把日期的时间强制在12:00，可以避免DST兼容问题
-     * @param year      year
-     * @param month     month
-     * @param day       day
-     * @param weekStart 周起始，1，2，7 日 一 六
-     * @return 获取周视图结束偏移量，用来生成周视图布局
+     * Unit test passed
+     * Get the end offset of the week view from the selected date to generate the week view layout
+     * In order to be compatible with DST, the DST time zone may have a time offset of 1-2 hours, which causes the actual date obtained in the early morning to move forward or backward by one day.
+     * The calendar does not have the concept of hours and minutes, so the date and time are forced to 12:00 to avoid DST compatibility issues
+     * @param year year
+     * @param month month
+     * @param day day
+     * @param weekStart Week start, 1, 2, 7 Monday, Saturday
+     * @return Get the end offset of the week view, used to generate the week view layout
      */
     public static int getWeekViewEndDiff(int year, int month, int day, int weekStart) {
         java.util.Calendar date = java.util.Calendar.getInstance();
@@ -724,11 +709,11 @@ final class CalendarUtil {
 
 
     /**
-     * 从月视图切换获得第一天的日期
-     * Test Pass 它是100%正确的
+     * Switch to get the date of the first day from the month view
+     * Test Pass is 100% correct
      * @param position position
      * @param delegate position
-     * @return 从月视图切换获得第一天的日期
+     * @return Switch to get the date of the first day from the month view
      */
     static Calendar getFirstCalendarFromMonthViewPager(int position, CalendarViewDelegate delegate) {
         Calendar calendar = new Calendar();
@@ -758,11 +743,11 @@ final class CalendarUtil {
 
 
     /**
-     * 根据传入的日期获取边界访问日期，要么最大，要么最小
+     * Get the boundary access date according to the incoming date, either the largest or the smallest
      *
      * @param calendar calendar
      * @param delegate delegate
-     * @return 获取边界访问日期
+     * @return Get boundary access date
      */
     static Calendar getRangeEdgeCalendar(Calendar calendar, CalendarViewDelegate delegate) {
         if (CalendarUtil.isCalendarInRange(delegate.getCurrentDay(), delegate)
@@ -780,10 +765,10 @@ final class CalendarUtil {
     }
 
     /**
-     * 是否是最小访问边界了
+     * Is it the minimum access boundary?
      *
      * @param calendar calendar
-     * @return 是否是最小访问边界了
+     * @return is the minimum access boundary
      */
     private static boolean isMinRangeEdge(Calendar calendar, CalendarViewDelegate delegate) {
         java.util.Calendar c = java.util.Calendar.getInstance();
@@ -795,7 +780,7 @@ final class CalendarUtil {
     }
 
     /**
-     * dp转px
+     * dp to px
      *
      * @param context context
      * @param dpValue dp

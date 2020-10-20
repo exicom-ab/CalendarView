@@ -1,20 +1,4 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
-
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -39,15 +23,14 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 /**
- * 日历布局
+ * Calendar layout
  */
 @SuppressWarnings("unused")
 public class CalendarLayout extends LinearLayout {
 
     /**
-     * 多点触控支持
+     * Multi-touch support
      */
     private int mActivePointerId;
 
@@ -56,60 +39,60 @@ public class CalendarLayout extends LinearLayout {
     private static final int INVALID_POINTER = -1;
 
     /**
-     * 周月视图
+     * Weekly view
      */
     private static final int CALENDAR_SHOW_MODE_BOTH_MONTH_WEEK_VIEW = 0;
 
 
     /**
-     * 仅周视图
+     * Week view only
      */
     private static final int CALENDAR_SHOW_MODE_ONLY_WEEK_VIEW = 1;
 
     /**
-     * 仅月视图
+     * Month view only
      */
     private static final int CALENDAR_SHOW_MODE_ONLY_MONTH_VIEW = 2;
 
     /**
-     * 默认展开
+     * Expand by default
      */
     private static final int STATUS_EXPAND = 0;
 
     /**
-     * 默认收缩
+     * Default shrink
      */
     private static final int STATUS_SHRINK = 1;
 
     /**
-     * 默认状态
+     * Default state
      */
     private int mDefaultStatus;
 
     private boolean isWeekView;
 
     /**
-     * 星期栏
+     * Day of the week
      */
     WeekBar mWeekBar;
 
     /**
-     * 自定义ViewPager，月视图
+     * Custom ViewPager, month view
      */
     MonthViewPager mMonthView;
 
     /**
-     * 日历
+     * calendar
      */
     CalendarView mCalendarView;
 
     /**
-     * 自定义的周视图
+     * Customized week view
      */
     WeekViewPager mWeekPager;
 
     /**
-     * 年视图
+     * Year view
      */
     YearViewPager mYearView;
 
@@ -119,30 +102,30 @@ public class CalendarLayout extends LinearLayout {
     ViewGroup mContentView;
 
     /**
-     * 默认手势
+     * Default gesture
      */
     private static final int GESTURE_MODE_DEFAULT = 0;
 
-//       /**
-    //     * 仅日历有效
-    //     */
+    /**
+     * Only the calendar is valid
+     */
 //    private static final int GESTURE_MODE_ONLY_CALENDAR = 1;
 
     /**
-     * 禁用手势
+     * Disable gestures
      */
     private static final int GESTURE_MODE_DISABLED = 2;
 
     /**
-     * 手势模式
+     * Gesture mode
      */
     private int mGestureMode;
 
 
     private int mCalendarShowMode;
 
-    private int mContentViewTranslateY; //ContentView  可滑动的最大距离距离 , 固定
-    private int mViewPagerTranslateY = 0;// ViewPager可以平移的距离，不代表mMonthView的平移距离
+    private int mContentViewTranslateY; //ContentView  Maximum sliding distance, fixed
+    private int mViewPagerTranslateY = 0;// The distance that ViewPager can translate, does not represent the translation distance of mMonthView
 
     private float downY;
     private float mLastY;
@@ -150,12 +133,12 @@ public class CalendarLayout extends LinearLayout {
     private boolean isAnimating = false;
 
     /**
-     * 内容布局id
+     * Content layout id
      */
     private int mContentViewId;
 
     /**
-     * 手速判断
+     * Content layout id
      */
     private VelocityTracker mVelocityTracker;
     private int mMaximumVelocity;
@@ -180,7 +163,7 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 初始化
+     * initialization
      *
      * @param delegate delegate
      */
@@ -194,9 +177,9 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 初始化当前时间的位置
+     * Initialize the current time position
      *
-     * @param cur 当前日期时间
+     * @param cur Current date and time
      */
     private void initCalendarPosition(Calendar cur) {
         int diff = CalendarUtil.getMonthViewStartDiff(cur, mDelegate.getWeekStart());
@@ -205,9 +188,9 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 当前第几项被选中，更新平移量
+     * Which item is currently selected, update the translation amount
      *
-     * @param selectPosition 月视图被点击的position
+     * @param selectPosition The clicked position of the month view
      */
     final void updateSelectPosition(int selectPosition) {
         int line = (selectPosition + 7) / 7;
@@ -215,7 +198,7 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 设置选中的周，更新位置
+     * Set the selected week and update the location
      *
      * @param week week
      */
@@ -225,7 +208,7 @@ public class CalendarLayout extends LinearLayout {
 
 
     /**
-     * 更新内容ContentView可平移的最大距离
+     * Update the maximum distance that ContentView can pan
      */
     void updateContentViewTranslateY() {
         Calendar calendar = mDelegate.mIndexCalendar;
@@ -236,7 +219,7 @@ public class CalendarLayout extends LinearLayout {
                     calendar.getMonth(), mItemHeight, mDelegate.getWeekStart())
                     - mItemHeight;
         }
-        //已经显示周视图，则需要动态平移contentView的高度
+        //The week view is already displayed, you need to dynamically shift the height of the contentView
         if (mWeekPager.getVisibility() == VISIBLE) {
             if (mContentView == null)
                 return;
@@ -245,7 +228,7 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 更新日历项高度
+     * Update calendar entry height
      */
     final void updateCalendarItemHeight() {
         mItemHeight = mDelegate.getCalendarItemHeight();
@@ -266,7 +249,7 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 隐藏日历
+     * Hide calendar
      */
     public void hideCalendarView() {
         if (mCalendarView == null) {
@@ -280,7 +263,7 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 显示日历
+     * Show calendar
      */
     public void showCalendarView() {
 
@@ -293,7 +276,7 @@ public class CalendarLayout extends LinearLayout {
     public boolean onTouchEvent(MotionEvent event) {
         if (mGestureMode == GESTURE_MODE_DISABLED ||
                 mCalendarShowMode == CALENDAR_SHOW_MODE_ONLY_MONTH_VIEW ||
-                mCalendarShowMode == CALENDAR_SHOW_MODE_ONLY_WEEK_VIEW) {//禁用手势，或者只显示某种视图
+                mCalendarShowMode == CALENDAR_SHOW_MODE_ONLY_WEEK_VIEW) {//Disable gestures, or show only a certain view
             return false;
         }
         if (mDelegate == null) {
@@ -320,7 +303,7 @@ public class CalendarLayout extends LinearLayout {
                 final int indexx = event.getActionIndex();
                 mActivePointerId = event.getPointerId(indexx);
                 if (mActivePointerId == 0) {
-                    //核心代码：就是让下面的 dy = y- mLastY == 0，避免抖动
+                    //Core code: Let the following dy = y-mLastY == 0 to avoid jitter
                     mLastY = event.getY(mActivePointerId);
                 }
                 break;
@@ -329,13 +312,13 @@ public class CalendarLayout extends LinearLayout {
 
                 getPointerIndex(event, mActivePointerId);
                 if (mActivePointerId == INVALID_POINTER) {
-                    //如果切换了手指，那把mLastY换到最新手指的y坐标即可，核心就是让下面的 dy== 0，避免抖动
+                    //If you switch your fingers, just change mLastY to the y coordinate of the latest finger. The core is to make the following dy== 0 to avoid jitter
                     mLastY = y;
                     mActivePointerId = ACTIVE_POINTER;
                 }
                 float dy = y - mLastY;
 
-                //向上滑动，并且contentView平移到最大距离，显示周视图
+                //Swipe up, and the contentView pans to the maximum distance, showing the week view
                 if (dy < 0 && mContentView.getTranslationY() == -mContentViewTranslateY) {
                     mLastY = y;
                     event.setAction(MotionEvent.ACTION_DOWN);
@@ -350,7 +333,7 @@ public class CalendarLayout extends LinearLayout {
                 }
                 hideWeek(false);
 
-                //向下滑动，并且contentView已经完全平移到底部
+                //Swipe down, and the contentView has completely panned to the bottom
                 if (dy > 0 && mContentView.getTranslationY() + dy >= 0) {
                     mContentView.setTranslationY(0);
                     translationViewPager();
@@ -358,14 +341,14 @@ public class CalendarLayout extends LinearLayout {
                     return super.onTouchEvent(event);
                 }
 
-                //向上滑动，并且contentView已经平移到最大距离，则contentView平移到最大的距离
+                //Swipe up, and the contentView has been translated to the maximum distance, then the contentView is translated to the maximum distance
                 if (dy < 0 && mContentView.getTranslationY() + dy <= -mContentViewTranslateY) {
                     mContentView.setTranslationY(-mContentViewTranslateY);
                     translationViewPager();
                     mLastY = y;
                     return super.onTouchEvent(event);
                 }
-                //否则按比例平移
+                //Otherwise pan proportionally
                 mContentView.setTranslationY(mContentView.getTranslationY() + dy);
                 translationViewPager();
                 mLastY = y;
@@ -434,9 +417,9 @@ public class CalendarLayout extends LinearLayout {
         if (action == MotionEvent.ACTION_MOVE) {
             float dy = y - mLastY;
             /*
-             * 如果向下滚动，有 2 种情况处理 且y在ViewPager下方
-             * 1、RecyclerView 或者其它滚动的View，当mContentView滚动到顶部时，拦截事件
-             * 2、非滚动控件，直接拦截事件
+             * If you scroll down, there are 2 cases to deal with and y is below ViewPager
+             * 1、RecyclerView Or other scrolling View, when mContentView scrolls to the top, intercept the event
+             * 2、Non-scrolling controls, directly intercept events
              */
             if (dy > 0 && mContentView.getTranslationY() == -mContentViewTranslateY) {
                 if (isScrollTop()) {
@@ -485,15 +468,15 @@ public class CalendarLayout extends LinearLayout {
                 float dy = y - mLastY;
                 float dx = x - mLastX;
                  /*
-                   如果向上滚动，且ViewPager已经收缩，不拦截事件
+                   If you scroll up and the ViewPager has shrunk, the event is not intercepted
                  */
                 if (dy < 0 && mContentView.getTranslationY() == -mContentViewTranslateY) {
                     return false;
                 }
                 /*
-                 * 如果向下滚动，有 2 种情况处理 且y在ViewPager下方
-                 * 1、RecyclerView 或者其它滚动的View，当mContentView滚动到顶部时，拦截事件
-                 * 2、非滚动控件，直接拦截事件
+                 * If you scroll down, there are 2 cases to deal with and y is below ViewPager
+                 * 1、RecyclerView or other scrolling View, when mContentView scrolls to the top, intercept the event
+                 * 2、Non-scrolling controls, directly intercept events
                  */
                 if (dy > 0 && mContentView.getTranslationY() == -mContentViewTranslateY
                         && y >= mDelegate.getCalendarItemHeight() + mDelegate.getWeekBarHeight()) {
@@ -506,7 +489,7 @@ public class CalendarLayout extends LinearLayout {
                     return false;
                 }
 
-                if (Math.abs(dy) > Math.abs(dx) ) { //纵向滑动距离大于横向滑动距离,拦截滑动事件
+                if (Math.abs(dy) > Math.abs(dx)) { //The vertical sliding distance is greater than the horizontal sliding distance, intercepting sliding events
                     if ((dy > 0 && mContentView.getTranslationY() <= 0)
                             || (dy < 0 && mContentView.getTranslationY() >= -mContentViewTranslateY)) {
                         mLastY = y;
@@ -600,7 +583,7 @@ public class CalendarLayout extends LinearLayout {
 
 
     /**
-     * 平移ViewPager月视图
+     * Pan ViewPager month view
      */
     private void translationViewPager() {
         float percent = mContentView.getTranslationY() * 1.0f / mContentViewTranslateY;
@@ -659,7 +642,7 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 是否展开了
+     * Has it expanded
      *
      * @return isExpand
      */
@@ -674,10 +657,10 @@ public class CalendarLayout extends LinearLayout {
 
 
     /**
-     * 展开
+     * Unfold
      *
-     * @param duration 时长
-     * @return 展开是否成功
+     * @param duration duration
+     * @return Whether the expansion was successful
      */
     public boolean expand(int duration) {
         if (isAnimating ||
@@ -727,10 +710,10 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 收缩
+     * shrink
      *
-     * @param duration 时长
-     * @return 成功或者失败
+     * @param duration duration
+     * @return Success or failure
      */
     public boolean shrink(int duration) {
         if (mGestureMode == GESTURE_MODE_DISABLED) {
@@ -766,7 +749,7 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 初始化状态
+     * Initialization state
      */
     final void initStatus() {
 
@@ -824,7 +807,7 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 隐藏周视图
+     * Hide week view
      */
     private void hideWeek(boolean isNotify) {
         if (isNotify) {
@@ -835,7 +818,7 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 显示周视图
+     * Show week view
      */
     private void showWeek() {
         onShowWeekView();
@@ -847,7 +830,7 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 周视图显示事件
+     * Week view showing events
      */
     private void onShowWeekView() {
         if (mWeekPager.getVisibility() == VISIBLE) {
@@ -860,7 +843,7 @@ public class CalendarLayout extends LinearLayout {
 
 
     /**
-     * 周视图显示事件
+     * Week view showing events
      */
     private void onShowMonthView() {
         if (mMonthView.getVisibility() == VISIBLE) {
@@ -872,9 +855,9 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * ContentView是否滚动到顶部 如果完全不适合，就复写这个方法
+     * ContentView Whether to scroll to the top If it is not suitable at all, just copy this method
      *
-     * @return 是否滚动到顶部
+     * @return Whether to scroll to the top
      */
     protected boolean isScrollTop() {
         if (mContentView instanceof CalendarScrollView) {
@@ -896,7 +879,7 @@ public class CalendarLayout extends LinearLayout {
 
 
     /**
-     * 隐藏内容布局
+     * Hide content layout
      */
     @SuppressLint("NewApi")
     final void hideContentView() {
@@ -917,7 +900,7 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 显示内容布局
+     * Display content layout
      */
     @SuppressLint("NewApi")
     final void showContentView() {
@@ -945,13 +928,13 @@ public class CalendarLayout extends LinearLayout {
     }
 
     /**
-     * 如果有十分特别的ContentView，可以自定义实现这个接口
+     * If you have a very special ContentView, you can customize this interface
      */
     public interface CalendarScrollView {
         /**
-         * 是否滚动到顶部
+         * Whether to scroll to the top
          *
-         * @return 是否滚动到顶部
+         * @return Whether to scroll to the top
          */
         boolean isScrollToTop();
     }

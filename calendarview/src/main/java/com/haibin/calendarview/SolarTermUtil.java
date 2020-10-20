@@ -1,25 +1,10 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.content.Context;
 
 /**
  * http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html
- * 24节气计算公式，参考该博客实现
+ * 24 solar terms calculation formula, refer to this blog to achieve
  */
 @SuppressWarnings("all")
 public final class SolarTermUtil {
@@ -30,35 +15,35 @@ public final class SolarTermUtil {
     }
 
     /**
-     * 24节气
+     * 24 solar terms
      */
     private static  String SOLAR_TERMS[] = null;
 
     /**
-     * 每弧度的角秒数
+     * Arc seconds per radian
      */
     private static final double SECOND_PER_RAD = 180 * 3600 / Math.PI;
 
     /**
-     * 每弧度的角度数
+     * Number of angles per radian
      */
     private static final double ANGLE_PER_RAD = 180 / Math.PI;
 
     /**
-     * 日历计算
-     * 2000年前儒略日数(2000-1-1)
+     * Calendar calculation
+     * Number of Julian days before 2000 (2000-1-1)
      */
     private static final double J2000 = 2451545;
 
     /**
-     * 黄赤交角系数表
+     * Yellow-red angle coefficient table
      */
     private static final double H_C_ANGLE_TABLE[] = {0, 50287.92262, 111.24406,
             0.07699, -0.23479, -0.00178, 0.00018, 0.00001};
 
 
     /**
-     * 世界时与原子时之差计算表
+     * Calculation table of difference between universal time and atomic time
      */
     private static final double[] DTS = {
             -4000, 108371.7, -13036.80, 392.000, 0.0000, -500, 17201.0,
@@ -75,35 +60,35 @@ public final class SolarTermUtil {
             6000};
 
     /**
-     * 离心率
+     * Eccentricity
      */
     private static final double GXC_E[] = {0.016708634, -0.000042037,
             -0.0000001267};
 
     /**
-     * 近点
+     * near-point
      */
     private static final double GXC_P[] = {102.93735 / ANGLE_PER_RAD, 1.71946 / ANGLE_PER_RAD,
             0.00046 / ANGLE_PER_RAD};
 
     /**
-     * 太平黄经
+     * Taiping Yellow Classics
      */
     private static final double GXC_L[] = {280.4664567 / ANGLE_PER_RAD,
             36000.76982779 / ANGLE_PER_RAD, 0.0003032028 / ANGLE_PER_RAD, 1 / 49931000 / ANGLE_PER_RAD,
             -1 / 153000000 / ANGLE_PER_RAD};
 
     /**
-     * 光行差常数
+     * Aberration Constant
      */
     private static final double GXC_K = 20.49552 / SECOND_PER_RAD;
 
 
     /**
-     * 向下取整
+     * Round down
      *
      * @param v v
-     * @return 取整数部分
+     * @return Take the integer part
      */
     private static double doubleFloor(double v) {
         v = Math.floor(v);
@@ -115,10 +100,10 @@ public final class SolarTermUtil {
 
 
     /**
-     * 对超过0-2PI的角度转为0-2PI
+     * For angles exceeding 0-2PI, turn to 0-2PI
      *
      * @param v v
-     * @return 对超过0-2PI的角度转为0-2PI
+     * @return For angles exceeding 0-2PI, turn to 0-2PI
      */
     private static double rad2mrad(double v) {
         v = v % (2 * Math.PI);
@@ -129,10 +114,10 @@ public final class SolarTermUtil {
     }
 
     /**
-     * 计算世界时与原子时之差,传入年
+     * Calculate the difference between universal time and atomic time, and pass in the year
      *
-     * @param year 年
-     * @return 计算世界时与原子时之差
+     * @param year years
+     * @return Calculate the difference between universal time and atomic time
      */
     private static double worldTimeDiff(double year) {
         int i;
@@ -147,23 +132,23 @@ public final class SolarTermUtil {
     }
 
     /**
-     * 传入儒略日(J2000起算),计算UTC与原子时的差(单位:日)
+     * Incoming Julian Day (calculated from J2000), calculate the difference between UTC and atomic time (unit: day)
      *
-     * @param julian 儒略日
-     * @return 计算UTC与原子时的差
+     * @param julian Julian Day
+     * @return Calculate the difference between UTC and atomic time
      */
     private static double atomTimeDiff(double julian) {
         return worldTimeDiff(julian / 365.2425 + 2000) / 86400.0;
     }
 
     /**
-     * 公历转儒略日,UTC=1表示原日期是UTC
+     * Gregorian calendar to Julian day, UTC=1 means the original date is UTC
      *
      * @param UTC UTC
-     * @return 公历转儒略日, UTC=1表示原日期是UTC
+     * @return Gregorian calendar to Julian day, UTC=1 means the original date is UTC
      */
     private static double toJulian(Time time, boolean UTC) {
-        double y = time.year; // 取出年月
+        double y = time.year; // Take out the year and month
         double m = time.month;
         double n = 0;
 
@@ -173,13 +158,13 @@ public final class SolarTermUtil {
         }
 
         if (time.year * 372 + time.month * 31 + time.day >= 588829) {
-            // 判断是否为格里高利历日1582*372+10*31+15
+            // Determine whether it is a Gregorian calendar day 1582*372+10*31+15
             n = doubleFloor(y / 100);
-            n = 2 - n + doubleFloor(n / 4);// 加百年闰
+            n = 2 - n + doubleFloor(n / 4);// Add a hundred years of leap
         }
 
-        n += doubleFloor(365.2500001 * (y + 4716)); // 加上年引起的偏移日数
-        n += doubleFloor(30.6 * (m + 1)) + time.day; // 加上月引起的偏移日数及日偏移数
+        n += doubleFloor(365.2500001 * (y + 4716)); // Plus the number of offset days caused by the year
+        n += doubleFloor(30.6 * (m + 1)) + time.day; // Add the number of offset days caused by the month and the number of days offset
         n += ((time.second / 60 + time.minute) / 60 + time.hour) / 24 - 1524.5;
         if (UTC)
             return n + atomTimeDiff(n - J2000);
@@ -188,7 +173,7 @@ public final class SolarTermUtil {
     }
 
     /**
-     * 儒略日数转公历,UTC=1表示目标公历是UTC
+     * Julian days to Gregorian calendar, UTC=1 means that the target Gregorian calendar is UTC
      *
      * @param jd  jd
      * @param UTC UTC
@@ -201,7 +186,7 @@ public final class SolarTermUtil {
 
         jd += 0.5;
 
-        // 取得日数的整数部份A及小数部分F
+        // Get the integer part A and decimal part F of the number of days
         double A = doubleFloor(jd);
         double F = jd - A;
         double D;
@@ -210,18 +195,18 @@ public final class SolarTermUtil {
             D = doubleFloor((A - 1867216.25) / 36524.25);
             A += 1 + D - doubleFloor(D / 4);
         }
-        A += 1524; // 向前移4年零2个月
-        time.year = doubleFloor((A - 122.1) / 365.25);// 年
-        D = A - doubleFloor(365.25 * time.year); // 去除整年日数后余下日数
-        time.month = doubleFloor(D / 30.6001); // 月数
-        time.day = D - doubleFloor(time.month * 30.6001);// 去除整月日数后余下日数
+        A += 1524; // 4 years and 2 months forward
+        time.year = doubleFloor((A - 122.1) / 365.25);// year
+        D = A - doubleFloor(365.25 * time.year); // The number of days remaining after subtracting the entire year
+        time.month = doubleFloor(D / 30.6001); // Months
+        time.day = D - doubleFloor(time.month * 30.6001);// The number of days remaining after removing the whole month
         time.year -= 4716;
         time.month--;
         if (time.month > 12)
             time.month -= 12;
         if (time.month <= 2)
             time.year++;
-        // 日的小数转为时分秒
+        // Day decimals converted to hours, minutes and seconds
         F *= 24;
         time.hour = doubleFloor(F);
         F -= time.hour;
@@ -235,7 +220,7 @@ public final class SolarTermUtil {
 
 
     /**
-     * 补岁差
+     * Make up for the precession
      *
      * @param jd jd
      * @param zb zb
@@ -252,7 +237,7 @@ public final class SolarTermUtil {
 
 
     /**
-     * 恒星周年光行差计算(黄道坐标中)
+     * Stellar annual aberration calculation (in ecliptic coordinates)
      *
      * @param t  t
      * @param zb zb
@@ -273,9 +258,9 @@ public final class SolarTermUtil {
     }
 
     /**
-     * 章动计算
+     * Nutation calculation
      */
-    private static final double nutB[] = {// 章动表
+    private static final double nutB[] = {// Nutation table
             2.1824391966, -33.757045954, 0.0000362262, 3.7340E-08, -2.8793E-10,
             -171996, -1742, 92025, 89, 3.5069406862, 1256.663930738,
             0.0000105845, 6.9813E-10, -2.2815E-10, -13187, -16, 5736, -31,
@@ -294,10 +279,10 @@ public final class SolarTermUtil {
 
 
     /**
-     * 计算黄经章动及交角章动
+     * Calculate Yellow Ching Nutation and Intersection Nutation
      *
      * @param t t
-     * @return 计算黄经章动及交角章动
+     * @return Calculate Yellow Ching Nutation and Intersection Nutation
      */
     private static Nutation nutation(double t) {
         Nutation d = new Nutation();
@@ -308,31 +293,31 @@ public final class SolarTermUtil {
         for (int i = 0; i < nutB.length; i += 9) {
             c = nutB[i] + nutB[i + 1] * t1 + nutB[i + 2] * t2 + nutB[i + 3]
                     * t3 + nutB[i + 4] * t4;
-            d.Lon += (nutB[i + 5] + nutB[i + 6] * t / 10) * Math.sin(c); // 黄经章动
-            d.Obl += (nutB[i + 7] + nutB[i + 8] * t / 10) * Math.cos(c); // 交角章动
+            d.Lon += (nutB[i + 5] + nutB[i + 6] * t / 10) * Math.sin(c); // Huang Jingzhang
+            d.Obl += (nutB[i + 7] + nutB[i + 8] * t / 10) * Math.cos(c); // Angular nutation
         }
-        d.Lon /= SECOND_PER_RAD * 10000; // 黄经章动
-        d.Obl /= SECOND_PER_RAD * 10000; // 交角章动
+        d.Lon /= SECOND_PER_RAD * 10000; // Huang Jingzhang
+        d.Obl /= SECOND_PER_RAD * 10000; // Angular nutation
         return d;
     }
 
 
     //
     /***************************************
-     * 如果用记事本查看此代码,请在"格式"菜单中去除"自动换行"
-     * E10是关于地球的,格式如下:
-     *    它是一个数组,每3个数看作一条记录,每条记录的3个数记为A,B,C
-     *    rec=A*cos(B+C*t);  式中t是J2000起算的儒略千年数
-     *    每条记录的计算结果(即rec)取和即得地球的日心黄经的周期量L0
-     * E11格式如下: rec = A*cos*(B+C*t) *t,     取和后得泊松量L1
-     * E12格式如下: rec = A*cos*(B+C*t) *t*t,   取和后得泊松量L2
-     * E13格式如下: rec = A*cos*(B+C*t) *t*t*t, 取和后得泊松量L3
-     * 最后地球的地心黄经:L = L0+L1+L2+L3+...
-     * E20,E21,E22,E23...用于计算黄纬
-     * M10,M11等是关于月球的,参数的用法请阅读Mnn()函数
+     * If you use Notepad to view this code, please remove "Auto Wrap" in the "Format" menu
+     * E10 is about the earth, the format is as follows:
+     * It is an array, every 3 numbers are regarded as a record, and the 3 numbers of each record are recorded as A, B, C
+     * rec=A*cos(B+C*t); where t is the Julian millennium from J2000
+     * The calculation result of each record (ie rec) is summed to obtain the period L0 of the earth's heliocentric yellow meridian
+     * The format of E11 is as follows: rec = A*cos*(B+C*t) *t, after taking the sum, the Poisson quantity L1
+     * The format of E12 is as follows: rec = A*cos*(B+C*t) *t*t, after taking the sum, the Poisson quantity L2
+     * The format of E13 is as follows: rec = A*cos*(B+C*t) *t*t*t, after taking the sum, the Poisson quantity L3
+     * The yellow meridian of the last earth: L = L0+L1+L2+L3+...
+     * E20, E21, E22, E23... are used to calculate the yellow latitude
+     * M10, M11, etc. are about the moon, please read the Mnn() function for the usage of parameters
      *****************************************/
-    //地球运动VSOP87参数
-    private static final double E10[] = { //黄经周期项
+    //Earth motion VSOP87 parameters
+    private static final double E10[] = { //Yellow menstrual cycle term
             1.75347045673, 0.00000000000, 0.0000000000, 0.03341656456, 4.66925680417, 6283.0758499914, 0.00034894275, 4.62610241759, 12566.1516999828, 0.00003417571, 2.82886579606, 3.5231183490,
             0.00003497056, 2.74411800971, 5753.3848848968, 0.00003135896, 3.62767041758, 77713.7714681205, 0.00002676218, 4.41808351397, 7860.4193924392, 0.00002342687, 6.13516237631, 3930.2096962196,
             0.00001273166, 2.03709655772, 529.6909650946, 0.00001324292, 0.74246356352, 11506.7697697936, 0.00000901855, 2.04505443513, 26.2983197998, 0.00001199167, 1.10962944315, 1577.3435424478,
@@ -348,31 +333,31 @@ public final class SolarTermUtil {
             0.00000051145, 0.28306864501, 5856.4776591154, 0.00000055577, 3.47006009062, 6279.5527316424, 0.00000041036, 5.36817351402, 8429.2412664666, 0.00000051605, 1.33282746983, 1748.0164130670,
             0.00000051992, 0.18914945834, 12139.5535091068, 0.00000049000, 0.48735065033, 1194.4470102246, 0.00000039200, 6.16832995016, 10447.3878396044, 0.00000035566, 1.77597314691, 6812.7668150860,
             0.00000036770, 6.04133859347, 10213.2855462110, 0.00000036596, 2.56955238628, 1059.3819301892, 0.00000033291, 0.59309499459, 17789.8456197850, 0.00000035954, 1.70876111898, 2352.8661537718};
-    private static final double E11[] = { //黄经泊松1项
+    private static final double E11[] = { //Yellow Classic Poisson 1 item
             6283.31966747491, 0.00000000000, 0.0000000000, 0.00206058863, 2.67823455584, 6283.0758499914, 0.00004303430, 2.63512650414, 12566.1516999828, 0.00000425264, 1.59046980729, 3.5231183490,
             0.00000108977, 2.96618001993, 1577.3435424478, 0.00000093478, 2.59212835365, 18849.2275499742, 0.00000119261, 5.79557487799, 26.2983197998, 0.00000072122, 1.13846158196, 529.6909650946,
             0.00000067768, 1.87472304791, 398.1490034082, 0.00000067327, 4.40918235168, 5507.5532386674, 0.00000059027, 2.88797038460, 5223.6939198022, 0.00000055976, 2.17471680261, 155.4203994342,
             0.00000045407, 0.39803079805, 796.2980068164, 0.00000036369, 0.46624739835, 775.5226113240, 0.00000028958, 2.64707383882, 7.1135470008, 0.00000019097, 1.84628332577, 5486.7778431750,
             0.00000020844, 5.34138275149, 0.9803210682, 0.00000018508, 4.96855124577, 213.2990954380, 0.00000016233, 0.03216483047, 2544.3144198834, 0.00000017293, 2.99116864949, 6275.9623029906};
-    private static final double E12[] = { //黄经泊松2项
+    private static final double E12[] = { //Yellow Classic Poisson 2 items
             0.00052918870, 0.00000000000, 0.0000000000, 0.00008719837, 1.07209665242, 6283.0758499914, 0.00000309125, 0.86728818832, 12566.1516999828, 0.00000027339, 0.05297871691, 3.5231183490,
             0.00000016334, 5.18826691036, 26.2983197998, 0.00000015752, 3.68457889430, 155.4203994342, 0.00000009541, 0.75742297675, 18849.2275499742, 0.00000008937, 2.05705419118, 77713.7714681205,
             0.00000006952, 0.82673305410, 775.5226113240, 0.00000005064, 4.66284525271, 1577.3435424478};
     private static final double E13[] = {0.00000289226, 5.84384198723, 6283.0758499914, 0.00000034955, 0.00000000000, 0.0000000000, 0.00000016819, 5.48766912348, 12566.1516999828};
     private static final double E14[] = {0.00000114084, 3.14159265359, 0.0000000000, 0.00000007717, 4.13446589358, 6283.0758499914, 0.00000000765, 3.83803776214, 12566.1516999828};
     private static final double E15[] = {0.00000000878, 3.14159265359, 0.0000000000};
-    private static final double E20[] = {  //黄纬周期项
+    private static final double E20[] = {  //Periodic term
             0.00000279620, 3.19870156017, 84334.6615813083, 0.00000101643, 5.42248619256, 5507.5532386674, 0.00000080445, 3.88013204458, 5223.6939198022, 0.00000043806, 3.70444689758, 2352.8661537718,
             0.00000031933, 4.00026369781, 1577.3435424478, 0.00000022724, 3.98473831560, 1047.7473117547, 0.00000016392, 3.56456119782, 5856.4776591154, 0.00000018141, 4.98367470263, 6283.0758499914,
             0.00000014443, 3.70275614914, 9437.7629348870, 0.00000014304, 3.41117857525, 10213.2855462110};
     private static final double E21[] = {0.00000009030, 3.89729061890, 5507.5532386674, 0.00000006177, 1.73038850355, 5223.6939198022};
-    private static final double E30[] = {  //距离周期项
+    private static final double E30[] = {  //Distance period term
             1.00013988799, 0.00000000000, 0.0000000000, 0.01670699626, 3.09846350771, 6283.0758499914, 0.00013956023, 3.05524609620, 12566.1516999828, 0.00003083720, 5.19846674381, 77713.7714681205,
             0.00001628461, 1.17387749012, 5753.3848848968, 0.00001575568, 2.84685245825, 7860.4193924392, 0.00000924799, 5.45292234084, 11506.7697697936, 0.00000542444, 4.56409149777, 3930.2096962196};
     private static final double E31[] = {0.00103018608, 1.10748969588, 6283.0758499914, 0.00001721238, 1.06442301418, 12566.1516999828, 0.00000702215, 3.14159265359, 0.0000000000};
     private static final double E32[] = {0.00004359385, 5.78455133738, 6283.0758499914};
     private static final double E33[] = {0.00000144595, 4.27319435148, 6283.0758499914};
-    //月球运动参数
+    //Lunar motion parameters
     private static final double M10[] = {
             22639.5858800, 2.3555545723, 8328.6914247251, 1.5231275E-04, 2.5041111E-07, -1.1863391E-09, 4586.4383203, 8.0413790709, 7214.0628654588, -2.1850087E-04, -1.8646419E-07, 8.7760973E-10, 2369.9139357, 10.3969336431, 15542.7542901840, -6.6188121E-05, 6.3946925E-08, -3.0872935E-10, 769.0257187, 4.7111091445, 16657.3828494503, 3.0462550E-04, 5.0082223E-07, -2.3726782E-09,
             -666.4175399, -0.0431256817, 628.3019552485, -2.6638815E-06, 6.1639211E-10, -5.4439728E-11, -411.5957339, 3.2558104895, 16866.9323152810, -1.2804259E-04, -9.8998954E-09, 4.0433461E-11, 211.6555524, 5.6858244986, -1114.6285592663, -3.7081362E-04, -4.3687530E-07, 2.0639488E-09, 205.4359530, 8.0845047526, 6585.7609102104, -2.1583699E-04, -1.8708058E-07, 9.3204945E-10,
@@ -428,17 +413,17 @@ public final class SolarTermUtil {
     private static final double M31[] = {
             0.5139500, 12.0108556517, 14914.4523349355, -6.3524240E-05, 6.3330532E-08, -2.5428962E-10, 0.3824500, 9.6553010794, 6585.7609102104, -2.1583699E-04, -1.8708058E-07, 9.3204945E-10, 0.3265400, 3.9694765808, 7700.3894694766, 1.5497663E-04, 2.4979472E-07, -1.1318993E-09, 0.2639600, 0.7416325637, 8956.9933799736, 1.4964887E-04, 2.5102751E-07, -1.2407788E-09,
             0.1230200, -1.6139220085, 628.3019552485, -2.6638815E-06, 6.1639211E-10, -5.4439728E-11, 0.0775400, 8.7830116346, 16171.0562454324, -6.8852003E-05, 6.4563317E-08, -3.6316908E-10, 0.0606800, 6.4274570623, 7842.3648207073, -2.2116475E-04, -1.8584780E-07, 8.2317000E-10, 0.0497000, 12.0539813334, 14286.1503796870, -6.0860358E-05, 6.2714140E-08, -1.9984990E-10};
-    private static final double M1n[] = {3.81034392032, 8.39968473021E+03, -3.31919929753E-05, //月球平黄经系数
+    private static final double M1n[] = {3.81034392032, 8.39968473021E+03, -3.31919929753E-05, //Moon's eclipse coefficient
             3.20170955005E-08, -1.53637455544E-10};
 
 
-    private static double EnnT = 0; // 调用Enn前先设置EnnT时间变量
+    private static double EnnT = 0; // Set EnnT time variable before calling Enn
 
     /**
-     * 计算E10,E11,E20等,即:某一组周期项或泊松项算出,计算前先设置EnnT时间
+     * Calculate E10, E11, E20, etc., that is: calculate a certain group of period items or Poisson items, set EnnT time before calculation
      *
      * @param F F
-     * @return 计算E10, E11, E20等
+     * @return Calculate E10, E11, E20, etc.
      */
     private static double Enn(double[] F) {
         double v = 0;
@@ -448,10 +433,10 @@ public final class SolarTermUtil {
     }
 
     /**
-     * 返回地球位置,日心Date黄道分点坐标
+     * Return the position of the earth, the coordinates of the ecliptic equinox of the heliocentric Date
      *
      * @param jd jd
-     * @return 返回地球位置, 日心Date黄道分点坐标
+     * @return returns the position of the earth, the coordinates of the ecliptic equinox of the heliocentric Date
      */
     private static double[] earCal(double jd) {
         EnnT = jd / 365250;
@@ -467,14 +452,14 @@ public final class SolarTermUtil {
     }
 
 
-    // ==================月位置计算===================
-    private static double MnnT = 0; // 调用Mnn前先设置MnnT时间变量
+    // ==================Month position calculation===================
+        private static double MnnT = 0; // Set the MnnT time variable before calling Mnn
 
     /**
-     * 计算M10,M11,M20等,计算前先设置MnnT时间
+     * Calculate M10, M11, M20, etc., set MnnT time before calculation
      *
      * @param F F
-     * @return 计算M10, M11, M20等, 计算前先设置MnnT时间
+     * @return Calculate M10, M11, M20, etc., set MnnT time before calculation
      */
     private static double Mnn(double[] F) {
         double v = 0, t1 = MnnT, t2 = t1 * t1, t3 = t2 * t1, t4 = t3 * t1;
@@ -487,10 +472,10 @@ public final class SolarTermUtil {
 
 
     /**
-     * 返回月球位置,返回地心Date黄道坐标
+     * Return to the moon position, return to the Earth's center Date ecliptic coordinates
      *
-     * @param julian 儒略历
-     * @return return 地心黄道坐标
+     * @param julian Julian calendar
+     * @return return Geocentric ecliptic coordinates
      */
     private static double[] moonCoord(double julian) {
         MnnT = julian / 36525;
@@ -501,81 +486,81 @@ public final class SolarTermUtil {
         llr[2] = (Mnn(M30) + Mnn(M31) * t1) * 0.999999949827;
         llr[0] = llr[0] + M1n[0] + M1n[1] * t1 + M1n[2] * t2 + M1n[3] * t3
                 + M1n[4] * t4;
-        llr[0] = rad2mrad(llr[0]); // 地心Date黄道原点坐标(不含岁差)
-        precession(julian, llr); // 补岁差
+        llr[0] = rad2mrad(llr[0]); // Geocentric Date ecliptic origin coordinates (excluding precession)
+        precession(julian, llr); // Make up for the precession
         return llr;
     }
 
 
     /**
-     * 地心坐标中的日月位置计算
+     * Calculation of the position of the sun and moon in geocentric coordinates
      *
-     * @param lx    lx=1时计算t时刻日月角距与jiao的差, lx=0计算t时刻太阳黄经与jiao的差
-     * @param time  time
+     * @param lx lx=1, calculate the difference between the sun-moon angular distance and jiao at time t, lx=0 calculate the difference between the sun's yellow longitude and jiao at time t
+     * @param time time
      * @param angle angle
-     * @return 地心坐标中的日月位置计算
+     * @return calculation of the sun and moon positions in geocentric coordinates
      */
     private static double angleDiff(int lx, double time, double angle) {
-        double[] sun = earCal(time); // 计算太阳真位置(先算出日心坐标中地球的位置)
+        double[] sun = earCal(time); // Calculate the true position of the sun (first calculate the position of the earth in heliocentric coordinates)
         sun[0] += Math.PI;
-        sun[1] = -sun[1]; // 转为地心坐标
-        addGxc(time, sun); // 补周年光行差
+        sun[1] = -sun[1]; // Convert to geocentric coordinates
+        addGxc(time, sun); // Compensation for annual aberration
         if (lx == 0) {
             Nutation d = nutation(time);
-            sun[0] += d.Lon; // 补黄经章动
+            sun[0] += d.Lon; // Supplement the Yellow Sutra
             return rad2mrad(angle - sun[0]);
         }
-        double[] moon = moonCoord(time); // 日月角差与章动无关
+        double[] moon = moonCoord(time); // Sun-moon angle difference has nothing to do with nutation
         return rad2mrad(angle - (moon[0] - sun[0]));
     }
 
     /**
-     * 已知位置反求时间,对于节气计算,应满足t在t1到t1+360天之间,对于Y年第n个节气(n=0是春分),t1可取值Y*365.2422+n*15.2,
-     * 对于朔望计算,应满足t在t1到t1+25天之间,在此范围之外,求右边的根
+     * Reverse the time of the known position. For solar term calculations, t should be between t1 and t1+360 days. For the nth solar term in year Y (n=0 is the vernal equinox), t1 can take the value Y*365.2422+n* 15.2,
+     * For synodic calculations, t should be between t1 and t1+25 days, outside this range, find the root of the right
      *
-     * @param t1    J2000起算儒略日数,传入的t1是指定角度对应真时刻t的前一些天
-     * @param angle 已知角度(jiao)求时间(t)
-     * @param lx    lx=0是太阳黄经达某角度的时刻计算(用于节气计算)
-     *              lx=1是日月角距达某角度的时刻计算(用于定朔望等)
-     * @return 已知位置反求时间
+     * @param t1 The number of Julian days from J2000, the incoming t1 is the days before the specified angle corresponds to the true time t
+     * @param angle known angle (jiao) find time (t)
+     * @param lx lx=0 is the moment when the sun's yellow meridian reaches a certain angle (used for solar term calculation)
+     * lx=1 is the calculation of the moment when the angular distance between the sun and the moon reaches a certain angle (used for setting the synodic, etc.)
+     * @return Reverse time of known position
      */
     private static double getTimeFromAngle(double t1, double angle, int lx) {
         double t2 = t1, t = 0, v;
         if (lx == 0)
-            t2 += 360; // 在t1到t2范围内求解(范气360天范围),结果置于t
+            t2 += 360; // Solve in the range of t1 to t2 (360-day range of air), and place the result at t
         else
             t2 += 25;
-        angle *= Math.PI / 180; // 待搜索目标角
-        // 利用截弦法计算
-        double v1 = angleDiff(lx, t1, angle); // v1,v2为t1,t2时对应的黄经
+        angle *= Math.PI / 180; // Target angle to be searched
+        // Calculate using truncation method
+        double v1 = angleDiff(lx, t1, angle); // v1, v2 are the corresponding yellow meridian at t1, t2
         double v2 = angleDiff(lx, t2, angle);
         if (v1 < v2)
-            v2 -= 2 * Math.PI; // 减2pi作用是将周期性角度转为连续角度
-        double k = 1, k2; // k是截弦的斜率
-        for (int i = 0; i < 10; i++) { // 快速截弦求根,通常截弦三四次就已达所需精度
-            k2 = (v2 - v1) / (t2 - t1); // 算出斜率
+            v2 -= 2 * Math.PI; // The effect of minus 2pi is to convert the periodic angle to a continuous angle
+        double k = 1, k2; // k is the slope of the chord
+        for (int i = 0; i < 10; i++) { // Quickly cut the string to find the root, usually three or four times to achieve the required accuracy
+            k2 = (v2 - v1) / (t2 - t1); // Calculate the slope
             if (Math.abs(k2) > 1e-15)
-                k = k2; // 差商可能为零,应排除
+                k = k2; // The difference quotient may be zero and should be excluded
             t = t1 - v1 / k;
-            v = angleDiff(lx, t, angle);// 直线逼近法求根(直线方程的根)
+            v = angleDiff(lx, t, angle);// Straight-line approximation method to find roots (roots of straight-line equations)
             if (v > 1)
-                v -= 2 * Math.PI; // 一次逼近后,v1就已接近0,如果很大,则应减1周
+                v -= 2 * Math.PI; // After one approximation, v1 is close to 0, if it is very large, it should be reduced by 1 week
             if (Math.abs(v) < 1e-8)
-                break; // 已达精度
+                break; // Accuracy reached
             t1 = t2;
             v1 = v2;
             t2 = t;
-            v2 = v; // 下一次截弦
+            v2 = v; // Next chord
         }
         return t;
     }
 
 
     /**
-     * 获得某一年24节气
+     * Get 24 solar terms in a certain year
      *
-     * @param year 年
-     * @return 24节气
+     * @param year year
+     * @return 24 solar terms
      */
 
     public static String[] getSolarTerms(int year) {
@@ -587,7 +572,7 @@ public final class SolarTermUtil {
         double jd = 365.2422 * (year - 2000), q;
         for (int i = 0; i < 19; i++) {
             q = getTimeFromAngle(jd + i * 15.2, i * 15, 0);
-            q = q + J2000 + (double) 8 / 24; // 计算第i个节气(i=0是春分),结果转为北京时
+            q = q + J2000 + (double) 8 / 24; // Calculate the i-th solar term (i=0 is the vernal equinox), and the result is converted to Beijing time
             Time time = setFromJulian(q, true);
             solarTerms[i + 3] = time.toString() + SOLAR_TERMS[i];
         }
@@ -597,17 +582,17 @@ public final class SolarTermUtil {
 
 
     /**
-     * 要获得2018年24节气需要传入2017年
+     * To get the 24 solar terms in 2018, you need to pass in 2017
      *
-     * @param year 要获得2018年24节气需要传入2017年
-     * @return 返回 立春 雨水 惊蛰
+     * @param year To get the 24 solar terms in 2018, you need to pass in 2017
+     * @return Return to Lichun Rain Sting
      */
     private static String[] getSolarTermsPreOffset(int year) {
         String[] solarTerms = new String[3];
         double jd = 365.2422 * (year - 2000), q;
         for (int i = 21; i < 24; i++) {
             q = getTimeFromAngle(jd + i * 15.2, i * 15, 0);
-            q = q + J2000 + (double) 8 / 24; // 计算第i个节气(i=0是春分)
+            q = q + J2000 + (double) 8 / 24; // Calculate the i-th solar term (i=0 is the vernal equinox)
             Time time = setFromJulian(q, true);
             solarTerms[i - 21] = time.toString() + SOLAR_TERMS[i];
         }
@@ -615,17 +600,17 @@ public final class SolarTermUtil {
     }
 
     /**
-     * 要获得2018年24节气需要传入2017年
+     * To get the 24 solar terms in 2018, you need to pass in 2017
      *
-     * @param year 要获得2018年24节气需要传入2017年
-     * @return 返回 小寒大寒
+     * @param year To get the 24 solar terms in 2018, you need to pass in 2017
+     * @return return Xiaohan Dahan
      */
     private static String[] getSolarTermsNextOffset(int year) {
         String[] solarTerms = new String[2];
         double jd = 365.2422 * (year - 2000), q;
         for (int i = 19; i < 21; i++) {
             q = getTimeFromAngle(jd + i * 15.2, i * 15, 0);
-            q = q + J2000 + (double) 8 / 24; // 计算第i个节气(i=0是春分)
+            q = q + J2000 + (double) 8 / 24; // Calculate the i-th solar term (i=0 is the vernal equinox)
             Time time = setFromJulian(q, true);
             solarTerms[i - 19] = time.toString() + SOLAR_TERMS[i];
         }
@@ -633,16 +618,16 @@ public final class SolarTermUtil {
     }
 
     /**
-     * 章动
+     * Nutation
      */
     private static class Nutation {
         /**
-         * 章动角
+         * Nutation angle
          */
         private double Lon;
 
         /**
-         * 交角
+         * Cross angle
          */
         private double Obl;
     }

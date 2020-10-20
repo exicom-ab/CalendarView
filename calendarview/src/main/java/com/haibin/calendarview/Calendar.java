@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
 
 import android.text.TextUtils;
@@ -22,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 日历对象、
+ * Calendar object、
  */
 @SuppressWarnings("all")
 public final class Calendar implements Serializable, Comparable<Calendar> {
@@ -30,94 +15,94 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
 
 
     /**
-     * 年
+     * year
      */
     private int year;
 
     /**
-     * 月1-12
+     * Month 1-12
      */
     private int month;
 
     /**
-     * 如果是闰月，则返回闰月
+     * If it is a leap month, return to the leap month
      */
     private int leapMonth;
 
     /**
-     * 日1-31
+     * Day 1-31
      */
     private int day;
 
     /**
-     * 是否是闰年
+     * Is it a leap year
      */
     private boolean isLeapYear;
 
     /**
-     * 是否是本月,这里对应的是月视图的本月，而非当前月份，请注意
+     * Whether it is the current month, this corresponds to the current month in the month view, not the current month, please note
      */
     private boolean isCurrentMonth;
 
     /**
-     * 是否是今天
+     * Is it today
      */
     private boolean isCurrentDay;
 
     /**
-     * 农历字符串，没有特别大的意义，用来做简单的农历或者节日标记
-     * 建议通过lunarCakendar获取完整的农历日期
+     * Lunar string, which has no special significance, is used to make simple lunar calendar or holiday markings
+     * It is recommended to obtain the complete lunar date through lunarCakendar
      */
     private String lunar;
 
 
     /**
-     * 24节气
+     * 24 solar terms
      */
     private String solarTerm;
 
 
     /**
-     * 公历节日
+     * Gregorian holiday
      */
     private String gregorianFestival;
 
     /**
-     * 传统农历节日
+     * Traditional lunar festival
      */
     private String traditionFestival;
 
     /**
-     * 计划，可以用来标记当天是否有任务,这里是默认的，如果使用多标记，请使用下面API
+     * Plan, can be used to mark whether there are tasks for the day, here is the default, if you use multiple marks, please use the following API
      * using addScheme(int schemeColor,String scheme); multi scheme
      */
     private String scheme;
 
     /**
-     * 各种自定义标记颜色、没有则选择默认颜色，如果使用多标记，请使用下面API
+     * Various custom marker colors, if not, choose the default color, if you use multiple markers, please use the following API
      * using addScheme(int schemeColor,String scheme); multi scheme
      */
     private int schemeColor;
 
 
     /**
-     * 多标记
+     * Multiple markers
      * multi scheme,using addScheme();
      */
     private List<Scheme> schemes;
 
     /**
-     * 是否是周末
+     * Is it weekend
      */
     private boolean isWeekend;
 
     /**
-     * 星期,0-6 对应周日到周一
+     * Week, 0-6 corresponds to Sunday to Monday
      */
     private int week;
 
     /**
-     * 获取完整的农历日期
+     * Get the complete lunar date
      */
     private Calendar lunarCalendar;
 
@@ -312,19 +297,19 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
     }
 
     /**
-     * 是否是相同月份
+     * Is it the same month
      *
-     * @param calendar 日期
-     * @return 是否是相同月份
+     * @param calendar date
+     * @return Is it the same month
      */
     public boolean isSameMonth(Calendar calendar) {
         return year == calendar.getYear() && month == calendar.getMonth();
     }
 
     /**
-     * 比较日期
+     * Comparison date
      *
-     * @param calendar 日期
+     * @param calendar date
      * @return -1 0 1
      */
     public int compareTo(Calendar calendar) {
@@ -335,26 +320,26 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
     }
 
     /**
-     * 运算差距多少天
+     * How many days is the calculation gap
      *
      * @param calendar calendar
-     * @return 运算差距多少天
+     * @return How many days is the calculation gap
      */
     public final int differ(Calendar calendar) {
         return CalendarUtil.differ(this, calendar);
     }
 
     /**
-     * 日期是否可用
+     * Whether the date is available
      *
-     * @return 日期是否可用
+     * @return Whether the date is available
      */
     public boolean isAvailable() {
         return year > 0 & month > 0 & day > 0 & day <=31 & month <= 12 & year >= 1900 & year <= 2099;
     }
 
     /**
-     * 获取当前日历对应时间戳
+     * Get the timestamp corresponding to the current calendar
      *
      * @return getTimeInMillis
      */
@@ -405,7 +390,7 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
     }
 
     /**
-     * 事件标记服务，现在多类型的事务标记建议使用这个
+     * Event marking service, it is recommended to use this for multiple types of transaction marking
      */
     public final static class Scheme implements Serializable {
         private int type;

@@ -1,20 +1,4 @@
-/*
- * Copyright (C) 2016 huanghaibin_dev <huanghaibin_dev@163.com>
- * WebSite https://github.com/MiracleTimes-Dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.haibin.calendarview;
-
 
 import android.content.Context;
 import android.graphics.Color;
@@ -29,8 +13,7 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 /**
- * 基本的日历View，派生出MonthView 和 WeekView
- * Created by huanghaibin on 2018/1/23.
+ * The basic calendar View, which derives MonthView and WeekView
  */
 
 public abstract class BaseView extends View implements View.OnClickListener, View.OnLongClickListener {
@@ -38,107 +21,107 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     CalendarViewDelegate mDelegate;
 
     /**
-     * 当前月份日期的笔
+     * Pen for current month day
      */
     protected Paint mCurMonthTextPaint = new Paint();
 
     /**
-     * 其它月份日期颜色
+     * Other month day color
      */
     protected Paint mOtherMonthTextPaint = new Paint();
 
     /**
-     * 当前月份农历文本颜色
+     * Lunar text color of current month
      */
     protected Paint mCurMonthLunarTextPaint = new Paint();
 
     /**
-     * 当前月份农历文本颜色
+     * Lunar text color of current month
      */
     protected Paint mSelectedLunarTextPaint = new Paint();
 
     /**
-     * 其它月份农历文本颜色
+     * Lunar text color for other months
      */
     protected Paint mOtherMonthLunarTextPaint = new Paint();
 
     /**
-     * 其它月份农历文本颜色
+     * Lunar text color for other months
      */
     protected Paint mSchemeLunarTextPaint = new Paint();
 
     /**
-     * 标记的日期背景颜色画笔
+     * Marked date background color brush
      */
     protected Paint mSchemePaint = new Paint();
 
     /**
-     * 被选择的日期背景色
+     * The selected date background color
      */
     protected Paint mSelectedPaint = new Paint();
 
     /**
-     * 标记的文本画笔
+     * Marked text brush
      */
     protected Paint mSchemeTextPaint = new Paint();
 
     /**
-     * 选中的文本画笔
+     * Selected text brush
      */
     protected Paint mSelectTextPaint = new Paint();
 
     /**
-     * 当前日期文本颜色画笔
+     * Current date text color pen
      */
     protected Paint mCurDayTextPaint = new Paint();
 
     /**
-     * 当前日期文本颜色画笔
+     * Current date text color pen
      */
     protected Paint mCurDayLunarTextPaint = new Paint();
 
     /**
-     * 日历布局，需要在日历下方放自己的布局
+     * Calendar layout, you need to put your own layout below the calendar
      */
     CalendarLayout mParentLayout;
 
     /**
-     * 日历项
+     * Calendar entry
      */
     List<Calendar> mItems;
 
     /**
-     * 每一项的高度
+     * Height of each item
      */
     protected int mItemHeight;
 
     /**
-     * 每一项的宽度
+     * The width of each item
      */
     protected int mItemWidth;
 
     /**
-     * Text的基线
+     * Text baseline
      */
     protected float mTextBaseLine;
 
     /**
-     * 点击的x、y坐标
+     * The x and y coordinates of the click
      */
     float mX, mY;
 
     /**
-     * 是否点击
+     * Whether to click
      */
     boolean isClick = true;
 
     /**
-     * 字体大小
+     * font size
      */
     static final int TEXT_SIZE = 14;
 
     /**
-     * 当前点击项
+     * Current click item
      */
     int mCurrentItem = -1;
 
@@ -152,7 +135,7 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     }
 
     /**
-     * 初始化配置
+     * Initial configuration
      *
      * @param context context
      */
@@ -222,7 +205,7 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     }
 
     /**
-     * 初始化所有UI配置
+     * Initialize all UI configuration
      *
      * @param delegate delegate
      */
@@ -275,7 +258,7 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
 
 
     /**
-     * 移除事件
+     * Remove event
      */
     final void removeSchemes() {
         for (Calendar a : mItems) {
@@ -286,7 +269,7 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     }
 
     /**
-     * 添加事件标记，来自Map
+     * Add event marker, from Map
      */
     final void addSchemesFromMap() {
         if (mDelegate.mSchemeDatesMap == null || mDelegate.mSchemeDatesMap.size() == 0) {
@@ -337,18 +320,18 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
 
 
     /**
-     * 开始绘制前的钩子，这里做一些初始化的操作，每次绘制只调用一次，性能高效
-     * 没有需要可忽略不实现
-     * 例如：
-     * 1、需要绘制圆形标记事件背景，可以在这里计算半径
-     * 2、绘制矩形选中效果，也可以在这里计算矩形宽和高
+     * The hook before starting to draw, here are some initialization operations, and it is only called once for each drawing, and the performance is efficient
+     * No need can be ignored and not realized
+     * E.g：
+     * 1、Need to draw a circular marker event background, you can calculate the radius here
+     * 2、Draw rectangle selection effect, you can also calculate rectangle width and height here
      */
     protected void onPreviewHook() {
         // TODO: 2017/11/16
     }
 
     /**
-     * 是否是选中的
+     * Is it selected
      *
      * @param calendar calendar
      * @return true or false
@@ -358,7 +341,7 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     }
 
     /**
-     * 更新事件
+     * Update event
      */
     final void update() {
         if (mDelegate.mSchemeDatesMap == null || mDelegate.mSchemeDatesMap.size() == 0) {//清空操作
@@ -372,10 +355,10 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
 
 
     /**
-     * 是否拦截日期，此设置续设置mCalendarInterceptListener
+     * Whether to block the date, this setting continues mCalendarInterceptListener
      *
      * @param calendar calendar
-     * @return 是否拦截日期
+     * @return Whether to block date
      */
     protected final boolean onCalendarIntercept(Calendar calendar) {
         return mDelegate.mCalendarInterceptListener != null &&
@@ -383,27 +366,27 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     }
 
     /**
-     * 是否在日期范围内
+     * Is it within the date range
      *
      * @param calendar calendar
-     * @return 是否在日期范围内
+     * @return Is it within the date range
      */
     protected final boolean isInRange(Calendar calendar) {
         return mDelegate != null && CalendarUtil.isCalendarInRange(calendar, mDelegate);
     }
 
     /**
-     * 跟新当前日期
+     * New current date
      */
     abstract void updateCurrentDate();
 
     /**
-     * 销毁
+     * destroy
      */
     protected abstract void onDestroy();
 
     /**
-     * 初始化画笔相关
+     * Initialize brush related
      */
     protected void initPaint() {
 
