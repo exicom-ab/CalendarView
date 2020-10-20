@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Calendar Exicom</string>
+
+    <string-array name="english_week_string_array">
+        <item> Dag </item>
+        <item> en </item>
+        <item> två </item>
+        <item> Tre </item>
+        <item> fyra </item>
+        <item> Fem </item>
+        <item> Sex </item>
+    </string-array>
+
+    <string-array name = "chinese_week_string_array">
+        <item> söndag </item>
+        <item> måndag </item>
+        <item> tisdag </item>
+        <item> onsdag </item>
+        <item> torsdag </item>
+        <item> fredag ​​</item>
+        <item> lördag </item>
+    </string-array>
+
+    <string name = "list_dialog_title"> dynamisk uppdatering </string>
+
+    <string name = "func_dialog_title"> funktionsstöd </string>
+
+    <string-array name = "list_dialog_items">
+        <item> Söndag är veckans början </item>
+        <item> Måndag är början på veckan </item>
+        <item> Lördag är veckans början </item>
+        <item> Ändra urvalsläge: enstaka val / standard </item>
+        <item> Vecka och månadsvy för byte av hot swap </item>
+        <item> Månadsvisningsläge: visa alla </item>
+        <item> Månadsvisningsläge: endast den aktuella månaden </item>
+        <item> Läge för månadsvisning: automatisk fyllning </item>
+    </string-array>
+
+    <string-array name = "func_dialog_items">
+        <item> Expandera kalenderlayouten </item>
+        <item> Krymp kalenderlayouten </item>
+        <item> Föregående sida </item>
+        <item> Nästa sida </item>
+        <item> Tillbaka till idag </item>
+        <item> Begränsa datumintervallet </item>
+        <item> Visa datumintervall </item>
+    </string-array>
+
+    <string name = "flyme"> Flyme-mobilkalender </string>
+    <string name = "flyme_desc"> Inhemsk mobiltelefon kalender stil, välj automatiskt den första dagen </string>
+
+    <string name = "custom_china"> Vackert anpassad kinesisk stil </string>
+    <string name = "custom_china_desc"> missfärgning i helgen, prickhändelser + textmärke </string>
+
+    <string name = "full"> Helskärmsstil </string>
+    <string name = "full_desc"> Om du behöver det är det några minuter </string>
+
+    <string name = "range"> Val av intervall </string>
+    <string name = "range_desc"> Om du behöver en kalender för val av intervall </string>
+
+    <string name = "multi"> flervalsstil </string>
+    <string name = "multi_desc"> Om du behöver en stilkalender med flera val </string>
+
+    <string name = "colorful"> färgstark stil </string>
+    <string name = "colorful_desc"> beror på hur du ritar </string>
+
+    <string name = "view_pager"> ViewPager-stil </string>
+    <string name = "view_pager_desc"> Om innehållet är ViewPager </string>
+
+    <string name = "single"> Enkel markeringsstil </string>
+    <string name = "single_desc"> Envalstyp är mer populärt </string>
+
+    <string name = "progress"> progress bar style </string>
+    <string name = "progress_desc"> Om du utvecklar att göra APP, då </string>
+
+    <string name = "index"> prenumerationsstil för prenumeration </string>
+    <string name = "index_desc"> Så länge du vill måla kan du måla </string>
+
+    <string name = "galaxy"> galaxstil </string>
+    <string name = "galaxy_desc"> väldigt enkelt att anpassa </string>
+
+    <string name = "simple"> enkel stil </string>
+    <string name = "simple_desc"> Det här är den enklaste kalendern </string>
+
+</resources>
