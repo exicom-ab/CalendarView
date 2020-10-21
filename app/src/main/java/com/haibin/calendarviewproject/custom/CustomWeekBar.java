@@ -51,7 +51,7 @@ public class CustomWeekBar extends WeekBar {
      * @return 或者周文本
      */
     private String getWeekString(int index, int weekStart) {
-        String[] weeks = getContext().getResources().getStringArray(R.array.chinese_week_string_array);
+        String[] weeks = getContext().getResources().getStringArray(R.array.english_week_string_array);
 
         if (weekStart == 1) {
             return weeks[index];

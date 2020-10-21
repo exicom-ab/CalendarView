@@ -21,9 +21,6 @@ import com.haibin.calendarviewproject.group.GroupRecyclerView;
 import com.haibin.calendarviewproject.index.IndexActivity;
 import com.haibin.calendarviewproject.meizu.MeiZuActivity;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class SimpleActivity extends BaseActivity implements
         CalendarView.OnCalendarSelectListener,
         CalendarView.OnYearChangeListener,
@@ -90,8 +87,8 @@ public class SimpleActivity extends BaseActivity implements
         mCalendarView.setOnCalendarSelectListener(this);
         mTextYear.setText(String.valueOf(mCalendarView.getCurYear()));
         mYear = mCalendarView.getCurYear();
-        mTextMonthDay.setText(mCalendarView.getCurMonth() + "月" + mCalendarView.getCurDay() + "日");
-        mTextLunar.setText("今日");
+        mTextMonthDay.setText(mCalendarView.getCurMonth() + "Month" + mCalendarView.getCurDay() + "Day");
+        mTextLunar.setText("Today");
         mTextCurrentDay.setText(String.valueOf(mCalendarView.getCurDay()));
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -106,7 +103,7 @@ public class SimpleActivity extends BaseActivity implements
         int year = mCalendarView.getCurYear();
         int month = mCalendarView.getCurMonth();
 
-        Map<String, Calendar> map = new HashMap<>();
+       /* Map<String, Calendar> map = new HashMap<>();
         map.put(getSchemeCalendar(year, month, 3, 0xFF40db25, "假").toString(),
                 getSchemeCalendar(year, month, 3, 0xFF40db25, "假"));
         map.put(getSchemeCalendar(year, month, 6, 0xFFe69138, "事").toString(),
@@ -126,7 +123,7 @@ public class SimpleActivity extends BaseActivity implements
         map.put(getSchemeCalendar(year, month, 27, 0xFF13acf0, "多").toString(),
                 getSchemeCalendar(year, month, 27, 0xFF13acf0, "多"));
         //此方法在巨大的数据量上不影响遍历性能，推荐使用
-        mCalendarView.setSchemeDate(map);
+        mCalendarView.setSchemeDate(map);*/
 
     }
 
@@ -137,13 +134,13 @@ public class SimpleActivity extends BaseActivity implements
             case R.id.ll_flyme:
                 MeiZuActivity.show(this);
                 break;
-            case R.id.ll_simple:
+            case R.id.ll_simple_style:
                 SimpleActivity.show(this);
                 break;
             case R.id.ll_colorful:
                 ColorfulActivity.show(this);
                 break;
-            case R.id.ll_index:
+            case R.id.ll_subscript_style:
                 IndexActivity.show(this);
                 break;
         }
@@ -169,7 +166,7 @@ public class SimpleActivity extends BaseActivity implements
     public void onCalendarSelect(Calendar calendar, boolean isClick) {
         mTextLunar.setVisibility(View.VISIBLE);
         mTextYear.setVisibility(View.VISIBLE);
-        mTextMonthDay.setText(calendar.getMonth() + "月" + calendar.getDay() + "日");
+        mTextMonthDay.setText(calendar.getMonth() + "Month" + calendar.getDay() + "Day");
         mTextYear.setText(String.valueOf(calendar.getYear()));
         mTextLunar.setText(calendar.getLunar());
         mYear = calendar.getYear();

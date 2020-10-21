@@ -409,7 +409,7 @@ final class CalendarViewDelegate {
                 FIRST_DAY_OF_MONTH);
 
         mMonthViewShowMode = array.getInt(R.styleable.CalendarView_month_view_show_mode, MODE_ALL_MONTH);
-        mWeekStart = array.getInt(R.styleable.CalendarView_week_start_with, WEEK_START_WITH_SUN);
+        mWeekStart = array.getInt(R.styleable.CalendarView_week_start_with, WEEK_START_WITH_MON);
         mSelectMode = array.getInt(R.styleable.CalendarView_select_mode, SELECT_MODE_DEFAULT);
         mMaxMultiSelectSize = array.getInt(R.styleable.CalendarView_max_multi_select_size, Integer.MAX_VALUE);
         mMinSelectRange = array.getInt(R.styleable.CalendarView_min_select_range, -1);
