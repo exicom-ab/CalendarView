@@ -234,7 +234,7 @@
                     android:background="@color/line_color" />
 
                 <LinearLayout
-                    android:id="@+id/ll_custom"
+                    android:id="@+id/ll_chinese_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -277,7 +277,7 @@
                     android:background="@color/line_color" />
 
                 <LinearLayout
-                    android:id="@+id/ll_full"
+                    android:id="@+id/ll_full_screen_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -320,7 +320,7 @@
                     android:background="@color/line_color" />
 
                 <LinearLayout
-                    android:id="@+id/ll_range"
+                    android:id="@+id/ll_range_selection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -364,7 +364,7 @@
                     android:background="@color/line_color" />
 
                 <LinearLayout
-                    android:id="@+id/ll_multi"
+                    android:id="@+id/ll_multi_selection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -452,7 +452,7 @@
                     android:background="@color/line_color" />
 
                 <LinearLayout
-                    android:id="@+id/ll_tab"
+                    android:id="@+id/ll_viewpager_tab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -496,7 +496,7 @@
                     android:background="@color/line_color" />
 
                 <LinearLayout
-                    android:id="@+id/ll_single"
+                    android:id="@+id/ll_radio_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -584,7 +584,7 @@
 
 
                 <LinearLayout
-                    android:id="@+id/ll_index"
+                    android:id="@+id/ll_subscript_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -628,7 +628,7 @@
                     android:background="@color/line_color" />
 
                 <LinearLayout
-                    android:id="@+id/ll_solar_system"
+                    android:id="@+id/ll_solar_galaxy_system"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -672,7 +672,7 @@
                     android:background="@color/line_color" />
 
                 <LinearLayout
-                    android:id="@+id/ll_simple"
+                    android:id="@+id/ll_simple_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">

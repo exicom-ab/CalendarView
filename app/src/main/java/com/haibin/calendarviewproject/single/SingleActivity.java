@@ -152,13 +152,13 @@ public class SingleActivity extends BaseActivity implements
             case R.id.ll_flyme:
                 MeiZuActivity.show(this);
                 break;
-            case R.id.ll_simple:
+            case R.id.ll_simple_style:
                 SimpleActivity.show(this);
                 break;
             case R.id.ll_colorful:
                 SingleActivity.show(this);
                 break;
-            case R.id.ll_index:
+            case R.id.ll_subscript_style:
                 IndexActivity.show(this);
                 break;
         }

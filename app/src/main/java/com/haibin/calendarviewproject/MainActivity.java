@@ -261,17 +261,17 @@ public class MainActivity extends BaseActivity implements
         //mCalendarView.setSchemeDate(schemes);
 
         findViewById(R.id.ll_flyme).setOnClickListener(this);
-        findViewById(R.id.ll_simple).setOnClickListener(this);
-        findViewById(R.id.ll_range).setOnClickListener(this);
+        findViewById(R.id.ll_simple_style).setOnClickListener(this);
+        findViewById(R.id.ll_range_selection).setOnClickListener(this);
         findViewById(R.id.ll_colorful).setOnClickListener(this);
-        findViewById(R.id.ll_index).setOnClickListener(this);
-        findViewById(R.id.ll_tab).setOnClickListener(this);
-        findViewById(R.id.ll_single).setOnClickListener(this);
-        findViewById(R.id.ll_multi).setOnClickListener(this);
-        findViewById(R.id.ll_solar_system).setOnClickListener(this);
+        findViewById(R.id.ll_subscript_style).setOnClickListener(this);
+        findViewById(R.id.ll_viewpager_tab).setOnClickListener(this);
+        findViewById(R.id.ll_radio_style).setOnClickListener(this);
+        findViewById(R.id.ll_multi_selection).setOnClickListener(this);
+        findViewById(R.id.ll_solar_galaxy_system).setOnClickListener(this);
         findViewById(R.id.ll_progress).setOnClickListener(this);
-        findViewById(R.id.ll_custom).setOnClickListener(this);
-        findViewById(R.id.ll_full).setOnClickListener(this);
+        findViewById(R.id.ll_chinese_style).setOnClickListener(this);
+        findViewById(R.id.ll_full_screen_style).setOnClickListener(this);
     }
 
     @Override
@@ -318,38 +318,38 @@ public class MainActivity extends BaseActivity implements
                 //CalendarActivity.show(this);
 
                 break;
-            case R.id.ll_custom:
+            case R.id.ll_chinese_style:
                 CustomActivity.show(this);
                 break;
-            case R.id.ll_full:
+            case R.id.ll_full_screen_style:
                 FullActivity.show(this);
                 break;
-            case R.id.ll_range:
+            case R.id.ll_range_selection:
                 RangeActivity.show(this);
                 break;
-            case R.id.ll_simple:
-                SimpleActivity.show(this);
+            case R.id.ll_multi_selection:
+                MultiActivity.show(this);
                 break;
             case R.id.ll_colorful:
                 ColorfulActivity.show(this);
                 break;
-            case R.id.ll_index:
-                IndexActivity.show(this);
-                break;
-            case R.id.ll_tab:
+            case R.id.ll_viewpager_tab:
                 ViewPagerActivity.show(this);
                 break;
-            case R.id.ll_single:
+            case R.id.ll_radio_style:
                 SingleActivity.show(this);
-                break;
-            case R.id.ll_multi:
-                MultiActivity.show(this);
-                break;
-            case R.id.ll_solar_system:
-                SolarActivity.show(this);
                 break;
             case R.id.ll_progress:
                 ProgressActivity.show(this);
+                break;
+            case R.id.ll_subscript_style:
+                IndexActivity.show(this);
+                break;
+            case R.id.ll_solar_galaxy_system:
+                SolarActivity.show(this);
+                break;
+            case R.id.ll_simple_style:
+                SimpleActivity.show(this);
                 break;
 
         }
